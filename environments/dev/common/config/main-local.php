@@ -3,41 +3,9 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=127.0.0.1; dbname=zj_lltsfo2013',
+            'dsn' => 'mysql:host=127.0.0.1; dbname=jifen',
             'username' => 'root',
-            'password' => '123123',
-            'charset' => 'utf8mb4',
-        ],
-        //这个帐号 目前只有001可以访问
-        'db_slave' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=127.0.0.1; dbname=lltsfo2013',
-            'username' => 'root',
-            'password' => '',
-            'charset' => 'utf8mb4',
-        ],
-
-        'db_woqu' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=127.0.0.1; dbname=woqu2017',
-            'username' => 'root',
-            'password' => '111111',
-            'charset' => 'utf8mb4',
-        ],
-        //这个帐号需serena帐号才能更新数据结构
-        'db_wxadmin' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=127.0.0.1; dbname=wxadmin',
-            'username' => 'root',
-            'password' => '',
-            'charset' => 'utf8mb4',
-        ],
-
-        'db_ip' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=127.0.0.1; dbname=dbip',
-            'username' => 'root',
-            'password' => '123123',
+            'password' => '$&@Zz515',
             'charset' => 'utf8mb4',
         ],
 
@@ -53,20 +21,6 @@ return [
             'hostname' => '127.0.0.1',
             'port'     => '6379',
             'database' => 2,
-        ],
-        'db_logs' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=127.0.0.1; dbname=llt2017logs',
-            'username' => 'root',
-            'password' => '123123',
-            'charset' => 'utf8mb4',
-        ],
-        'db_lltmdc' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=127.0.0.1; dbname=lltmdc',
-            'username' => 'root',
-            'password' => '123123',
-            'charset' => 'utf8mb4',
         ],
 
 //        'mailer' => [

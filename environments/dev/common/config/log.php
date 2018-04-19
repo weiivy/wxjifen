@@ -98,36 +98,6 @@ return [
     ],
 ];
 
-return [
-    'log' => [
-        'targets' => [
-            'file' => [
-                'class' => 'yii\log\FileTarget',
-                'levels' => ['error', 'warning', 'info'],
-                'logVars' =>['_SERVER'],
-		'prefix' => function ($message) {
-                    $iPaddress = gethostname();
-                    return "[$iPaddress]";
-                },
-            ],
-            'email' => [
-                'class' => 'common\components\EmailTargets',
-		'levels' => ['error'],
-                'except' => [
-                    'yii\web\HttpException:404',
-                ],
-                'logVars' =>['_SERVER'],
-                'message' => [
-                    'to' => 'serena.liu@ipptravel.com',
-                    'subject' => 'product Application Log'
-                ],
-		'prefix' => function ($message) {
-                    $iPaddress = gethostname();
-                    return "[$iPaddress]";
-                },
-            ],
-        ],
-    ],
-];
+
 
 
