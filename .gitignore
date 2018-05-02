@@ -1,7 +1,102 @@
-assets/*
-!assets/.gitignore
-protected/runtime/*
-!protected/runtime/.gitignore
-protected/data/*.db
-themes/classic/views/
-vendor/*
+CREATE TABLE `pre_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `out_trade_no` varchar(32) DEFAULT '' COMMENT '订单号',
+  `member_id` int(11) NOT NULL DEFAULT '0' COMMENT '下单人',
+  `bank` varchar(50) NOT NULL DEFAULT '' COMMENT '银行名称',
+  `integral` int(11) NOT NULL DEFAULT '0' COMMENT '使用积分',
+  `money` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '兑换金额',
+  `exchange_code` varchar(255) DEFAULT '' COMMENT '兑换码',
+  `valid_time` date NOT NULL  COMMENT '有效日期',
+  `remark` text COMMENT '备注',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '订单状态',
+  `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '新增时间',
+  `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `ind_out_trade_no` (`out_trade_no`),
+  KEY `ind_member_id` (`created_at`,`member_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='报单订单表';
+
+
+
+
+CREATE TABLE `pre_order_photo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL DEFAULT '0' COMMENT '订单ID',
+  `image` varchar(255) NOT NULL DEFAULT '' COMMENT '图片地址',
+  `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '新增时间',
+  `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `ind_order_id` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='报单图片';
+
+DROP TABLE IF EXISTS pre_order;
+CREATE TABLE `pre_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `out_trade_no` varchar(32) DEFAULT '' COMMENT '订单号',
+  `member_id` int(11) NOT NULL DEFAULT '0' COMMENT '下单人',
+  `bank` varchar(50) NOT NULL DEFAULT '' COMMENT '银行名称',
+  `integral` int(11) NOT NULL DEFAULT '0' COMMENT '使用积分',
+  `money` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '兑换金额',
+  `exchange_code` varchar(255) DEFAULT '' COMMENT '兑换码',
+  `valid_time` date NOT NULL DEFAULT '0000-00-00' COMMENT '有效日期',
+  `remark` text COMMENT '备注',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '订单状态',
+  `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '新增时间',
+  `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `ind_out_trade_no` (`out_trade_no`),
+  KEY `ind_member_id` (`created_at`,`member_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='报单订单表';
+
+DROP TABLE IF EXISTS pre_member;
+CREATE TABLE `pre_member` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `password_hash` varchar(255) NOT NULL DEFAULT '' COMMENT '密码',
+  `openid` varchar(255) NOT NULL DEFAULT '' COMMENT '用户唯一标识',
+  `nickname` varchar(255) NOT NULL DEFAULT '' COMMENT '昵称',
+  `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '头像',
+  `mobile` varchar(255) NOT NULL DEFAULT '' COMMENT '手机',
+  `password_salt` varchar(13) NOT NULL DEFAULT '' COMMENT 'Auth Key',
+  `password_reset_token` varchar(255) NOT NULL DEFAULT '' COMMENT '重置密码Token',
+  `mobile_check_token` varchar(255) NOT NULL DEFAULT '' COMMENT '手机验证Token',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '10' COMMENT '状态',
+  `grade` int(1) NOT NULL DEFAULT '1' COMMENT '会员等级 1 会员 2 代理  3 股东',
+  `money` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '金额',
+  `pid` int(11) NOT NULL DEFAULT '0' COMMENT '父级',
+  `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '新增时间',
+  `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `openid` (`openid`),
+  KEY `ind_nickname` (`nickname`),
+  KEY `ind_mobile` (`mobile`),
+  KEY `ind_openid` (`openid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='会员表';
+
+DROP TABLE IF EXISTS pre_contact;
+CREATE TABLE `pre_contact` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `openid` varchar(50) NOT NULL DEFAULT '' COMMENT '用户标识',
+  `nickname` varchar(500) NOT NULL DEFAULT '' COMMENT '昵称',
+  `sex` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '性别',
+  `province` varchar(64) DEFAULT NULL COMMENT '用户个人资料填写的省份',
+  `country` varchar(32) DEFAULT NULL COMMENT '国家，如中国为CN',
+  `city` varchar(64) DEFAULT NULL COMMENT '普通用户个人资料填写的城市',
+  `head_image` varchar(255) NOT NULL DEFAULT '' COMMENT '头像',
+  `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '新增时间',
+  `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `ind_openid_id` (`openid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='公众号粉丝';
+
+DROP TABLE IF EXISTS pre_capital_details;
+CREATE TABLE `pre_capital_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `member_id` int(11) NOT NULL DEFAULT '0' COMMENT '会员ID',
+  `type` varchar(2) NOT NULL DEFAULT '+' COMMENT '符号',
+  `kind` tinyint(3) unsigned NOT NULL DEFAULT '10' COMMENT '交易类别：10 充值、20 提成、30 升级返现、40 提现',
+  `money` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '金额',
+  `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '新增时间',
+  `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `ind_member_id` (`member_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='资金明细表';

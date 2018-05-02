@@ -23,4 +23,9 @@ class SiteController extends Controller
             'get-mobile' => 'api\actions\site\GetMobile',
         ];
     }
+
+    public function actionIndex()
+    {
+        echo phpinfo();
+    }
 } 

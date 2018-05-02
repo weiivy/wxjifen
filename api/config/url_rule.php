@@ -16,4 +16,5 @@ return [
     'POST member'                                                => 'member/member',
     'POST friends'                                               => 'member/friends',
     'POST add-order'                                             => 'record/add-order',
+    'GET index'                                                  => 'site/index'
 ];
