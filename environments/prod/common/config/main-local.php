@@ -4,33 +4,9 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=127.0.0.1; dbname=zj_lltsfo2013',
+            'dsn' => 'mysql:host=127.0.0.1; dbname=jifen',
             'username' => 'root',
-            'password' => '123123',
-            'charset' => 'utf8mb4',
-        ],
-
-        'db_slave' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=127.0.0.1; dbname=lltsfo2013',
-            'username' => 'root',
-            'password' => '',
-            'charset' => 'utf8mb4',
-        ],
-
-        'db_woqu' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=127.0.0.1; dbname=woqu2017',
-            'username' => 'root',
-            'password' => '111111',
-            'charset' => 'utf8mb4',
-        ],
-
-        'db_ip' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=127.0.0.1; dbname=dbip',
-            'username' => 'root',
-            'password' => '123123',
+            'password' => 'zz515',
             'charset' => 'utf8mb4',
         ],
 
