@@ -1,6 +1,6 @@
 <?php
 
-namespace  common\components\ace;
+namespace  api\library\ace;
 /**
  * error code 说明.
  * <ul>
