@@ -22,9 +22,7 @@ class WxLogin extends BaseAction
         $appid  =  Yii::$app->params['wx']['developer']['appId'];
         $secret =   Yii::$app->params['wx']['developer']['appSecret'];
         $URL = "https://api.weixin.qq.com/sns/jscode2session?appid=$appid&secret=$secret&js_code=$code&grant_type=authorization_code";
-//        $apiData = $this->curlGet($URL);
-        var_dump(file_get_contents($URL));die;
-        $apiData = file_get_contents($URL);
+        $apiData = $this->curlGet($URL);
         $apiData = json_decode($apiData, true);
 
         if(!isset($apiData['errcode'])){
@@ -63,11 +61,12 @@ class WxLogin extends BaseAction
         //https请求 不验证证书和host
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,10);
 
         $output = curl_exec($ch);
         if( !$output)
         {
-            trigger_error(curl_error($ch));
+            echo curl_error($ch);die;
         }
         curl_close($ch);
         return $output;
