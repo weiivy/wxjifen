@@ -24,13 +24,13 @@ class WxLogin extends BaseAction
         $URL = "https://api.weixin.qq.com/sns/jscode2session?appid=$appid&secret=$secret&js_code=$code&grant_type=authorization_code";
         $apiData = $this->curlGet($URL);
         $apiData = json_decode($apiData, true);
-        return $apiData;
 
         if(!isset($apiData['errcode'])){
             $sessionKey = $apiData['session_key'];
             $userifo = new WXBizDataCrypt($appid, $sessionKey);
 
             $errCode = $userifo->decryptData($encryptedData, $iv, $data );
+            return $errCode;
 
             //todo存取用户信息
             if ($errCode == 0) {
