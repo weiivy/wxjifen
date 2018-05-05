@@ -17,6 +17,7 @@ class WxLogin extends BaseAction
     public function run()
     {
         $code   =   Yii::$app->request->post('code');
+        return $code;
         $encryptedData   =   Yii::$app->request->post('encryptedData');
         $iv   =   Yii::$app->request->post('iv');
         $appid  =  Yii::$app->params['wx']['developer']['appId'];
@@ -24,6 +25,7 @@ class WxLogin extends BaseAction
         $URL = "https://api.weixin.qq.com/sns/jscode2session?appid=$appid&secret=$secret&js_code=$code&grant_type=authorization_code";
         $apiData = $this->curlGet($URL);
         $apiData = json_decode($apiData, true);
+
         if(!isset($apiData['errcode'])){
             $sessionKey = $apiData['session_key'];
             $userifo = new WXBizDataCrypt($appid, $sessionKey);
