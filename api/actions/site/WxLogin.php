@@ -34,7 +34,7 @@ class WxLogin extends BaseAction
             $userifo = new WXBizDataCrypt($appid, $sessionKey);
 
             $errCode = $userifo->decryptData($encryptedData, $iv, $data );
-            return $data;
+            return $errCode;
 
             //todo存取用户信息
             if ($errCode == 0) {
