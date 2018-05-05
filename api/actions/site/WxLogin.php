@@ -27,6 +27,7 @@ class WxLogin extends BaseAction
 
         $apiData =  ["session_key"=> "AZ3fo9SSIA7WOudnwtQdFA==",
     "openid"=>"omd6J5bHKLRYkL1MEcp6WERkBauM"];
+        return $apiData;
 
 
         if(!isset($apiData['errcode'])){
