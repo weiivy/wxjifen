@@ -27,7 +27,6 @@ class WxLogin extends BaseAction
 
         $apiData =  ["session_key"=> "AZ3fo9SSIA7WOudnwtQdFA==",
     "openid"=>"omd6J5bHKLRYkL1MEcp6WERkBauM"];
-        return $apiData;
 
 
         if(!isset($apiData['errcode'])){
@@ -35,6 +34,8 @@ class WxLogin extends BaseAction
             $userifo = new WXBizDataCrypt($appid, $sessionKey);
 
             $errCode = $userifo->decryptData($encryptedData, $iv, $data );
+            return $data;
+
             //todo存取用户信息
             if ($errCode == 0) {
                 $data = json_decode($data, true);
