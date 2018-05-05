@@ -23,9 +23,9 @@ class WxLogin extends BaseAction
         $secret =   Yii::$app->params['wx']['developer']['appSecret'];
         $URL = "https://api.weixin.qq.com/sns/jscode2session?appid=$appid&secret=$secret&js_code=$code&grant_type=authorization_code";
 //        $apiData = $this->curlGet($URL);
-        $apiData=file_get_contents($URL);
+        var_dump(file_get_contents($URL));die;
+        $apiData = file_get_contents($URL);
         $apiData = json_decode($apiData, true);
-        return $apiData;die;
 
         if(!isset($apiData['errcode'])){
             $sessionKey = $apiData['session_key'];
