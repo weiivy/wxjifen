@@ -51,7 +51,6 @@ class WXBizDataCrypt
         $aesCipher=base64_decode($encryptedData);
 
         $result=openssl_decrypt( $aesCipher, "AES-128-CBC", $aesKey, 1, $aesIV);
-        var_dump($aesCipher, "AES-128-CBC", $aesKey, 1, $aesIV, $result);die;
 
         $dataObj=json_decode( $result );
         if( $dataObj  == NULL )

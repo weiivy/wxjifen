@@ -36,7 +36,7 @@ class Contact extends \yii\db\ActiveRecord
         return [
             [['sex', 'created_at', 'updated_at'], 'integer'],
             [['openid'], 'string', 'max' => 50],
-            [['nickname'], 'string', 'max' => 500],
+            [['nickname'],'safe'],
             [['province', 'city'], 'string', 'max' => 64],
             [['country'], 'string', 'max' => 32],
             [['head_image'], 'string', 'max' => 255],

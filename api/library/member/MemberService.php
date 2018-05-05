@@ -29,13 +29,12 @@ class MemberService extends Component
     {
         $contact = new Contact();
         $contact->openid = $post['openId'];
-        $contact->nickname = $post['nickname'];
+        $contact->nickname = $post['nickName'];
         $contact->head_image = $post['avatarUrl'];
         $contact->city = $post['city'];
         $contact->province = $post['province'];
         $contact->country = $post['country'];
         $contact->sex = $post['gender'];
-
         $contact->save();
         if($contact->errors) {
             Yii::error(json_encode($contact->errors));

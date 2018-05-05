@@ -16,6 +16,8 @@ class Contact extends \common\models\Contact
             [['sex', 'created_at', 'updated_at'], 'integer'],
             [['openid'], 'string', 'max' => 50],
             [['nickname'], 'string', 'max' => 500],
+            [['province', 'city'], 'string', 'max' => 64],
+            [['country'], 'string', 'max' => 32],
             [['head_image'], 'string', 'max' => 255],
         ];
     }

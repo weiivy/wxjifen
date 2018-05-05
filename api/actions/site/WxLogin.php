@@ -37,7 +37,6 @@ class WxLogin extends BaseAction
             if ($errCode == 0) {
                 $data = json_decode($data, true);
 
-
                 //保存用户信息
                 if(MemberService::saveContact($data)) {
                     return [
