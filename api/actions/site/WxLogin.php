@@ -23,18 +23,22 @@ class WxLogin extends BaseAction
         $secret =   Yii::$app->params['wx']['developer']['appSecret'];
         $URL = "https://api.weixin.qq.com/sns/jscode2session?appid=$appid&secret=$secret&js_code=$code&grant_type=authorization_code";
         $apiData = $this->curlGet($URL);
-        $apiData = json_decode($apiData, true);
-        return $apiData;
+//        $apiData = json_decode($apiData, true);
+        $apiData =  ["session_key"=> "AZ3fo9SSIA7WOudnwtQdFA==",
+    "openid"=>"omd6J5bHKLRYkL1MEcp6WERkBauM"];
+
 
         if(!isset($apiData['errcode'])){
             $sessionKey = $apiData['session_key'];
             $userifo = new WXBizDataCrypt($appid, $sessionKey);
 
             $errCode = $userifo->decryptData($encryptedData, $iv, $data );
-
+            var_dump($errCode);
             //todo存取用户信息
             if ($errCode == 0) {
                 $data = json_decode($data, true);
+                var_dump($data);die;
+
 
                 //保存用户信息
                 if(MemberService::saveContact($data)) {
