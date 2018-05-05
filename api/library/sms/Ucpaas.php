@@ -1,6 +1,6 @@
 <?php
 
-namespace common\components\sms;
+namespace api\library\sms;
 
 /**
  * 云之汛

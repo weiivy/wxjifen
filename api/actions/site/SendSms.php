@@ -4,7 +4,7 @@ namespace api\actions\site;
 
 
 use api\actions\BaseAction;
-use common\components\sms\Ucpaas;
+use api\library\sms\Ucpaas;
 use Yii;
 /**
  * 发送短信验证码

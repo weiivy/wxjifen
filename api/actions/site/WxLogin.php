@@ -4,8 +4,8 @@ namespace api\actions\site;
 
 
 use api\actions\BaseAction;
+use api\library\ace\WXBizDataCrypt;
 use api\library\member\MemberService;
-use common\components\ace\WXBizDataCrypt;
 use Yii;
 /**
  * 登陆
