@@ -17,17 +17,26 @@ class SendSms extends BaseAction
     {
         $mobile = Yii::$app->request->post('mobile');
         if(empty($mobile)) return ['status' => 0, 'message' => '请输入手机号'];
-        $ucPass = new Ucpaas(['accountsid' => Yii::$app->params['wx']['smsapi']['accountSid'], 'token' => Yii::$app->params['wx']['smsapi']['token']]);
 
-        $code = rand(100000,999999);
-        $result = $ucPass->SendSms(Yii::$app->params['wx']['smsapi']['appid'], Yii::$app->params['wx']['smsapi']['templateid'], $code, $mobile, '');
+        try{
+            $verifyCode = Yii::$app->cache->get('verifyCode');
+            if(!empty($verifyCode)) throw new \Exception('60秒内只能发送一次', 0);
+            $ucPass = new Ucpaas(['accountsid' => Yii::$app->params['wx']['smsapi']['accountSid'], 'token' => Yii::$app->params['wx']['smsapi']['token']]);
 
-        if(!$result) return ['status' => 0, 'message' => '非国内电话不发送短信'];
-        $result = json_decode($result, true);
-        if($result['msg'] === 'OK') {
-            Yii::$app->cache->set('verifyCode', $code, 60);
-            return ['status' => 200, 'message' => "验证码发送成功"];
+            $code = rand(100000,999999);
+            $result = $ucPass->SendSms(Yii::$app->params['wx']['smsapi']['appid'], Yii::$app->params['wx']['smsapi']['templateid'], $code, $mobile, '');
+
+            if(!$result) return ['status' => 0, 'message' => '非国内电话不发送短信'];
+            $result = json_decode($result, true);
+            if($result['msg'] === 'OK') {
+                Yii::$app->cache->set('verifyCode', $code, 60);
+                return ['status' => 200, 'message' => "验证码发送成功"];
+            }
+            throw new \Exception($result['msg'], 0);
+        }catch(\Exception $e){
+            return ['status' => 0, 'message' => $e->getMessage()];
         }
-        return ['status' => 0, 'message' => $result['msg']];
+
+
     }
 } 
