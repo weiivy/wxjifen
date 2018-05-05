@@ -6,6 +6,7 @@ namespace api\actions\site;
 use api\actions\BaseAction;
 use api\library\ace\WXBizDataCrypt;
 use api\library\member\MemberService;
+use api\models\Contact;
 use Yii;
 /**
  * 登陆
@@ -25,20 +26,22 @@ class WxLogin extends BaseAction
         $apiData = $this->curlGet($URL);
         $apiData = json_decode($apiData, true);
 
-//        $apiData =  ["session_key"=> "AZ3fo9SSIA7WOudnwtQdFA==",
-//    "openid"=>"omd6J5bHKLRYkL1MEcp6WERkBauM"];
-//       
-
         if(!isset($apiData['errcode'])){
             $sessionKey = $apiData['session_key'];
             $userifo = new WXBizDataCrypt($appid, $sessionKey);
-
             $errCode = $userifo->decryptData($encryptedData, $iv, $data );
-            return $errCode;
-
             //todo存取用户信息
             if ($errCode == 0) {
                 $data = json_decode($data, true);
+
+                //检查用户信息是否存在
+                if(Contact::findOne(['openid' => $data['openId']])) {
+                    return [
+                        'status' => 200,
+                        'data' => $data,
+                        'message' => '获取用户信息'
+                    ];
+                }
 
                 //保存用户信息
                 if(MemberService::saveContact($data)) {
