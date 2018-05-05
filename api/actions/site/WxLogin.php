@@ -22,9 +22,10 @@ class WxLogin extends BaseAction
         $appid  =  Yii::$app->params['wx']['developer']['appId'];
         $secret =   Yii::$app->params['wx']['developer']['appSecret'];
         $URL = "https://api.weixin.qq.com/sns/jscode2session?appid=$appid&secret=$secret&js_code=$code&grant_type=authorization_code";
-        echo $URL;die;
-        $apiData = $this->curlGet($URL);
+//        $apiData = $this->curlGet($URL);
+        $apiData=file_get_contents($URL);
         $apiData = json_decode($apiData, true);
+        return $apiData;die;
 
         if(!isset($apiData['errcode'])){
             $sessionKey = $apiData['session_key'];
@@ -64,6 +65,10 @@ class WxLogin extends BaseAction
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
         $output = curl_exec($ch);
+        if( !$output)
+        {
+            trigger_error(curl_error($ch));
+        }
         curl_close($ch);
         return $output;
     }
