@@ -31,13 +31,12 @@ class WxLogin extends BaseAction
         if(!isset($apiData['errcode'])){
             $sessionKey = $apiData['session_key'];
             $userifo = new WXBizDataCrypt($appid, $sessionKey);
+            echo 111;die;
 
             $errCode = $userifo->decryptData($encryptedData, $iv, $data );
-            var_dump($errCode);
             //todo存取用户信息
             if ($errCode == 0) {
                 $data = json_decode($data, true);
-                var_dump($data);die;
 
 
                 //保存用户信息
