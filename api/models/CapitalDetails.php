@@ -14,6 +14,9 @@ class CapitalDetails extends \common\models\CapitalDetails
     const KIND_30 = 30; //升级返现
     const KIND_40 = 40; //提现
 
+    const STATUS_YES = 1; //支付
+    const STATUS_NO = 2;  //待支付
+
     /**
      * 交易类型别名
      * @author Ivy Zhang<ivyzhang@lulutrip.com>
@@ -31,4 +34,5 @@ class CapitalDetails extends \common\models\CapitalDetails
         ];
         return isset($array[$kind]) ? $array[$kind] : null;
     }
+
 }

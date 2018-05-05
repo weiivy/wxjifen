@@ -3,7 +3,10 @@
 namespace api\library\capitalDetails;
 
 
+use api\library\member\MemberService;
+use api\models\BankConfig;
 use api\models\CapitalDetails;
+use api\models\Order;
 use yii\base\Component;
 use yii\data\Pagination;
 
@@ -27,7 +30,7 @@ class CapitalDetailsService extends Component
     public static function getList($page, $pageSize, $type, $memberId)
     {
         $list = CapitalDetails::find();
-        $list->where(['member_id'=> $memberId]);
+        $list->where(['member_id'=> $memberId, 'status' => CapitalDetails::STATUS_YES]);
         if(!empty($type)) {
             $list->andWhere(['type' => $type]);
         }
@@ -42,4 +45,77 @@ class CapitalDetailsService extends Component
         }
         return ['list' => $list, 'count' => $pages->totalCount];
     }
+
+
+    /**
+     * 升级返现
+     * @author Ivy Zhang<ivyzhang@lulutrip.com>
+     * @copyright 2018-05-04
+     * @param $memberId
+     * @return bool
+     */
+    public static function upgradeRebate($memberId)
+    {
+        //检查该用户是否有父级
+        $pid = MemberService::getPid($memberId);
+        if( $pid === 0) {
+            return true;
+        }
+
+        //有父级给父级返佣
+        $capitalDetails = new CapitalDetails();
+        $capitalDetails->member_id = $pid;
+        $capitalDetails->type = "+";
+        $capitalDetails->status = CapitalDetails::STATUS_YES;
+        $capitalDetails->kind = CapitalDetails::KIND_30;
+        $capitalDetails->money = 120;
+        $capitalDetails->created_at = $capitalDetails->updated_at = time();
+        $capitalDetails->save();
+        if($capitalDetails->errors) {
+            \Yii::error(json_encode($capitalDetails->errors));
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 提成
+     * @author Ivy Zhang<ivyzhang@lulutrip.com>
+     * @copyright 2018-05-04
+     * @param $orderId
+     * @return bool
+     */
+    public static function commission($orderId)
+    {
+        //检查订单是否存在
+        $order = Order::findOne(['id' => $orderId]);
+        if(empty($order)) return true;
+
+        //检查该用户是否有父级
+        $pid = MemberService::getPid($order->member_id);
+        if( $pid === 0) {
+            return true;
+        }
+
+        //获取银行配置点数
+        $bankConfig = BankConfig::findOne(['bank' => $order->bank]);;
+        if(empty($bankConfig)) return true;
+
+        //有父级给父级提成
+        $commission = round((($bankConfig->money / $bankConfig->score) * $order->integral), 2);
+        $capitalDetails = new CapitalDetails();
+        $capitalDetails->member_id = $pid;
+        $capitalDetails->type = "+";
+        $capitalDetails->status = CapitalDetails::STATUS_YES;
+        $capitalDetails->kind = CapitalDetails::KIND_30;
+        $capitalDetails->money = $commission;
+        $capitalDetails->created_at = $capitalDetails->updated_at = time();
+        $capitalDetails->save();
+        if($capitalDetails->errors) {
+            \Yii::error(json_encode($capitalDetails->errors));
+        }
+        return true;
+    }
+
+
 }

@@ -21,7 +21,6 @@ class WxLogin extends BaseAction
         $iv   =   Yii::$app->request->post('iv');
         $appid  =  Yii::$app->params['wx']['developer']['appId'];
         $secret =   Yii::$app->params['wx']['developer']['appSecret'];
-
         $URL = "https://api.weixin.qq.com/sns/jscode2session?appid=$appid&secret=$secret&js_code=$code&grant_type=authorization_code";
         $apiData = $this->curlGet($URL);
         $apiData = json_decode($apiData, true);
@@ -44,12 +43,12 @@ class WxLogin extends BaseAction
                     ];
                 }
             }
-            return [
-                'status' => 0,
-                'message' => '获取用户信息失败'
-            ];
-
         }
+
+        return [
+            'status' => 0,
+            'message' => '获取用户信息失败'
+        ];
     }
 
     public function curlGet($url)

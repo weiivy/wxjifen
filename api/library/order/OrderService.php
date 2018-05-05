@@ -67,8 +67,10 @@ class OrderService extends Component
         $order->out_trade_no = $outTradeNo;
         $order->member_id = $post['member_id'];
         $order->bank = $post['bank'];
+        $order->integral = $post['score'];
         if(!empty($post['exchange_code'])) $order->exchange_code = $post['exchange_code'];
         if($post['valid_time'] != '请选择有效期') $order->valid_time = $post['valid_time'];
+        $order->status = Order::STATUS_10;
         if(!empty($post['remark'])) $order->remark = $post['remark'];
         $order->created_at = $order->updated_at = time();
         $order->save();
@@ -117,7 +119,8 @@ class OrderService extends Component
         }
 
         $ext = $image->getExtension();
-        $path_result = Help::createItemPath('photo',$ext);
+
+        $path_result = Help::createItemPath('/uploads',$ext);
         $image->saveAs($path_result['save_path']);
 
         $model = new OrderPhoto();

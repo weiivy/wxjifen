@@ -9,41 +9,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'api\controllers',
     'bootstrap' => ['log'],
-    'timeZone'=>'America/Los_Angeles',
-    'modules' => [
-        'woqu' => [
-            'class' => 'api\modules\woqu\Module',
-        ],
-
-        'special' => [
-            'class' => 'api\modules\special\Module',
-        ],
-        'admin' => [
-            'class' => 'api\modules\admin\Module',
-        ],
-        'channel' => [
-            'class' => 'api\modules\channel\Module',
-        ],
-        'customized' => [
-            'class' => 'api\modules\customized\Module',
-        ],
-        'rentcar' => [
-            'class' => 'api\modules\rentcar\Module',
-        ],
-        'order' => [
-            'class' => 'api\modules\order\Module',
-        ],
-        'setting' => [
-            'class' => 'api\modules\setting\Module',
-
-        ],
-        'op' => [
-            'class' => 'api\modules\op\Module',
-        ],
-        'saleactivity' => [
-            'class' => 'api\modules\saleactivity\Module',
-        ],
-    ],
+    'timeZone'=>'Asia/Shanghai',
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',

@@ -14,7 +14,6 @@ class SiteController extends Controller
 {
     public function actions()
     {
-
         return [
             'wxlogin' => 'api\actions\site\WxLogin',
             'sendSms' => 'api\actions\site\SendSms',
@@ -23,9 +22,4 @@ class SiteController extends Controller
             'get-mobile' => 'api\actions\site\GetMobile',
         ];
     }
-
-    public function actionIndex()
-    {
-        echo phpinfo();
-    }
-} 
+}

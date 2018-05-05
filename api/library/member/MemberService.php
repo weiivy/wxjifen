@@ -154,5 +154,43 @@ class MemberService extends Component
         return ['list' => $friends, 'count' => $pages->totalCount];
     }
 
+    /**
+     * 根据会员ID获取会员信息
+     * @author Ivy Zhang<ivyzhang@lulutrip.com>
+     * @copyright 2018-05-04
+     * @param $memberId
+     * @return null|static
+     */
+    public static function getMemberInfo($memberId)
+    {
+        return Member::findOne(['id' => $memberId]);
+    }
+
+    /**
+     * 获取会员等级
+     * @author Ivy Zhang<ivyzhang@lulutrip.com>
+     * @copyright 2018-05-04
+     * @param $memberId
+     * @return mixed|null
+     */
+    public static function getMemberGrade($memberId)
+    {
+        $member = static::getMemberInfo($memberId);
+        return empty($member) ? null : $member->grade;
+    }
+
+    /**
+     * 获取会员父级ID
+     * @author Ivy Zhang<ivyzhang@lulutrip.com>
+     * @copyright 2018-05-04
+     * @param $memberId
+     * @return mixed|null
+     */
+    public static function getPid($memberId)
+    {
+        $member = static::getMemberInfo($memberId);
+        return empty($member) ? 0 : $member->pid;
+    }
+
 
 } 

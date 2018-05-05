@@ -37,7 +37,7 @@ class Help extends \yii\base\Component
     public static function RecursiveMkdir($path){
         if (!file_exists($path)) {
             self::RecursiveMkdir(dirname($path));
-            @mkdir($path, 0777);
+            mkdir(\Yii::$app->getBasePath() . $path, 0777, true);
         }
     }
 
@@ -47,7 +47,7 @@ class Help extends \yii\base\Component
         $n = \Yii::$app->security->generateRandomString(32).'.'.$ext;
         $save_path = "{$type}/{$year}/{$day}";
 
-        $path = 'static/'.$save_path;
+        $path = '/uploads/'.$save_path;
         self::RecursiveMkdir($path);
         return array(
             'save_path'=>$path. '/' . $n,

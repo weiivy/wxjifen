@@ -4,7 +4,6 @@
  * @copyright 2017-07-03
  * @author Serena Liu<serena.liu@ipptravel.com>
  */
-
 return [
     'POST  login'                                                => 'site/wxlogin',
     'POST sendSms'                                               => 'site/sendSms',
@@ -17,5 +16,6 @@ return [
     'POST member'                                                => 'member/member',
     'POST friends'                                               => 'member/friends',
     'POST add-order'                                             => 'record/add-order',
-    'GET index'                                                  => 'site/index'
+    'GET pay/notify'                                             => 'notify/notify',
+    'POST upgrade'                                             => 'member/upgrade',
 ];

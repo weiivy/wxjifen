@@ -21,6 +21,7 @@ class AddOrder extends BaseAction
         try{
             $orderId = OrderService::saveOrder($body);
 
+
             //验证图片信息
             OrderService::uploadFile($orderId);
             Yii::$app->db->transaction->commit();
