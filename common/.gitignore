@@ -1,6 +1,7 @@
 config/define.php
 config/params-local.php
 config/main-local.php
+config/log.php
 config/releaseVersion
 /cscope.out
 /cscope.files
