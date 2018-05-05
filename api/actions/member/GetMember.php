@@ -29,7 +29,7 @@ class GetMember extends BaseAction
         ];
 
         //交易记录
-        $data['trade'] = $this->getTrade($member['id']);
+        $data['trade'] = (float)$this->getTrade($member['id']);
 
         //订单数量
         $data['order'] = $this->getOrderCount($member['id']);
