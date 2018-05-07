@@ -57,6 +57,7 @@ class NotifyController extends Controller
      */
     public function processOrder($outTradeNo, $totalFee)
     {
+        $outTradeNo = trim($outTradeNo, 'W');
         \Yii::$app->db->beginTransaction();
         $capitalDetails = CapitalDetails::findOne(['id' => $outTradeNo, 'status' => CapitalDetails::STATUS_NO ]);
         if(empty($capitalDetails)) {

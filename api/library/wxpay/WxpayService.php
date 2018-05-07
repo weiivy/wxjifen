@@ -50,7 +50,7 @@ class WxpayService
 //            'nonce_str' => '2HcgEIzv3GElFSJu',
             'notify_url' => $notifyUrl,
             'openid' => $openid,                        //rade_type=JSAPI，此参数必传
-            'out_trade_no' => $outTradeNo,
+            'out_trade_no' => 'W'.$outTradeNo,
 //            'out_trade_no' => 21,
             'spbill_create_ip' => '127.0.0.1',
             'total_fee' => intval($totalFee * 100),             //单位 转为分
