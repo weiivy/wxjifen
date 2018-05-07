@@ -26,6 +26,7 @@ class FileTargets extends FileTarget
              * 对日志进行日期文件夹管理 开始
              */
             $arr = explode('/', $this->logFile);
+
             $logfileName = $arr[count($arr)-1];
             if($this->fileType == 0){ //日期格式开头拼接
                 $this->logFile = str_replace($logfileName, date('Y-m-d').'_'.$logfileName, $this->logFile);
@@ -42,7 +43,8 @@ class FileTargets extends FileTarget
         }
         $logPath = dirname($this->logFile);
         if (!is_dir($logPath)) {
-            FileHelper::createDirectory($logPath, $this->dirMode, true);
+            mkdir($logPath, $this->dirMode, true);
+//            FileHelper::createDirectory($logPath, $this->dirMode);
         }
         if ($this->maxLogFiles < 1) {
             $this->maxLogFiles = 1;

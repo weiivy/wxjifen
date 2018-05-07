@@ -127,7 +127,7 @@ class WxpayService
         );
 
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-        var_dump($postStr);die;
+        \Yii::error($postStr);
 
         /*
         $postStr = '<xml>
