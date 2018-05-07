@@ -6,6 +6,7 @@ namespace api\actions\member;
 
 use api\actions\BaseAction;
 use api\library\member\MemberService;
+use api\models\Member;
 use Yii;
 /**
  * 注册
@@ -35,6 +36,7 @@ class Register extends BaseAction
 
             //保存数据
             $member = MemberService::saveMember($post);
+            $member['gradeAlisa'] = Member::gradeAlisa($member['grade']);
             return [
                 'status'  => 200,
                 'message' => "注册成功",
