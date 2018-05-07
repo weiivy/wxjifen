@@ -15,7 +15,8 @@ class Upgrade extends BaseAction
     public function run()
     {
         $memberId = Yii::$app->request->post('memberId');
-        $fee = Yii::$app->request->post('fee');
+//        $fee = Yii::$app->request->post('fee');
+        $fee = 0.01;
         $kind = Yii::$app->request->post('kind');
         if(empty($fee)) return ['status' => 0, 'message' => '操作失败'];
         $member = Member::findOne(['id' => $memberId]);
