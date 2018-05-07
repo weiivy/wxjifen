@@ -21,6 +21,7 @@ class CheckMember extends BaseAction
         if(empty($member)) {
             return ['status' => 0, 'data' => null];
         }
+        $member['gradeAlisa'] = Member::gradeAlisa($member['grade']);
         return ['status' => 200, 'data' => $member];
     }
 }
