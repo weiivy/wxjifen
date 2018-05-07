@@ -24,12 +24,15 @@ class Upgrade extends BaseAction
 
         //生成充值记录
         try{
-            $id = static::addRecord($member, $fee, $kind);
-            $capitalDetails = CapitalDetails::findOne(['id' => $id]);
-            $config = Yii::$app->params['wx']['wxPayConfig'];
-            $payService = new WxpayService($config['mch_id'], $config['appid'], $config['key']);
-            $notifyUrl = Url::to('pay/notify');
-            $data = $payService->createJsBizPackage($member->openid, $capitalDetails->money, $capitalDetails->id, "充值", $notifyUrl, time());
+//            $id = static::addRecord($member, $fee, $kind);
+//            $capitalDetails = CapitalDetails::findOne(['id' => $id]);
+//            $config = Yii::$app->params['wx']['wxPayConfig'];
+//            $payService = new WxpayService($config['mch_id'], $config['appid'], $config['key']);
+//            $notifyUrl = Url::toRoute('/pay/notify', 'http');
+//            $data = $payService->createJsBizPackage($member->openid, $capitalDetails->money, $capitalDetails->id, "充值", $notifyUrl, time());
+            $data = '{"appId":"wx347d53defefdfa69","timeStamp":1525703902,"nonceStr":"nSXjxDf9RrNC2Byq","package":"prepay_id=wx07223827938958336c2750233580871328","signType":"MD5","paySign":"B3BA1634E52C6BD168515057E0D03ECD"}';
+            $data = json_decode($data, true);
+
             return ['status' => 200, 'message' => "success", "data" => $data];
 
         }catch (\Exception $e){

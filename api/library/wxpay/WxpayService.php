@@ -46,10 +46,12 @@ class WxpayService
             'attach' => '支付',                          //商家数据包，原样返回
             'body' => $orderName,
             'mch_id' => $config['mch_id'],
-            'nonce_str' => self::createNonceStr(),
+//            'nonce_str' => self::createNonceStr(),
+            'nonce_str' => '2HcgEIzv3GElFSJu',
             'notify_url' => $notifyUrl,
             'openid' => $openid,                        //rade_type=JSAPI，此参数必传
-            'out_trade_no' => $outTradeNo,
+//            'out_trade_no' => $outTradeNo,
+            'out_trade_no' => 21,
             'spbill_create_ip' => '127.0.0.1',
             'total_fee' => intval($totalFee * 100),             //单位 转为分
             'trade_type' => 'JSAPI',
@@ -57,7 +59,6 @@ class WxpayService
 
         $unified['sign'] = self::getSign($unified, $config['key']);
         $responseXml = self::curlPost('https://api.mch.weixin.qq.com/pay/unifiedorder', self::arrayToXml($unified));
-
         /*
         <xml>
         <return_code><![CDATA[SUCCESS]]></return_code>
