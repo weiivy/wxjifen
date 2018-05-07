@@ -127,8 +127,7 @@ class WxpayService
         );
 
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-
-        //error_log($postStr, 3, './str.txt');
+        var_dump($postStr);die;
 
         /*
         $postStr = '<xml>
