@@ -6,6 +6,7 @@ namespace api\library\capitalDetails;
 use api\library\member\MemberService;
 use api\models\BankConfig;
 use api\models\CapitalDetails;
+use api\models\Member;
 use api\models\Order;
 use yii\base\Component;
 use yii\data\Pagination;
@@ -62,19 +63,34 @@ class CapitalDetailsService extends Component
             return true;
         }
 
+        $addFee = 120;
+        \Yii::$app->db->beginTransaction();
         //有父级给父级返佣
         $capitalDetails = new CapitalDetails();
         $capitalDetails->member_id = $pid;
         $capitalDetails->type = "+";
         $capitalDetails->status = CapitalDetails::STATUS_YES;
         $capitalDetails->kind = CapitalDetails::KIND_30;
-        $capitalDetails->money = 120;
+        $capitalDetails->money = $addFee;
         $capitalDetails->created_at = $capitalDetails->updated_at = time();
         $capitalDetails->save();
         if($capitalDetails->errors) {
             \Yii::error(json_encode($capitalDetails->errors));
+            \Yii::$app->db->transaction->rollBack();
             return false;
         }
+
+        //修改用户金额
+        $member = Member::findOne(['id' => $pid]);
+        $member->money = $addFee;
+        $member->updated_at = time();
+        $member->save();
+        if($member->errors) {
+            \Yii::error(json_encode($member->errors));
+            \Yii::$app->db->transaction->rollBack();
+            return false;
+        }
+        \Yii::$app->db->transaction->commit();
         return true;
     }
 
@@ -101,6 +117,7 @@ class CapitalDetailsService extends Component
         $bankConfig = BankConfig::findOne(['bank' => $order->bank]);;
         if(empty($bankConfig)) return true;
 
+        \Yii::$app->db->beginTransaction();
         //有父级给父级提成
         $commission = round((($bankConfig->money / $bankConfig->score) * $order->integral), 2);
         $capitalDetails = new CapitalDetails();
@@ -112,8 +129,22 @@ class CapitalDetailsService extends Component
         $capitalDetails->created_at = $capitalDetails->updated_at = time();
         $capitalDetails->save();
         if($capitalDetails->errors) {
+            \Yii::$app->db->transaction->rollBack();
             \Yii::error(json_encode($capitalDetails->errors));
+            return;
         }
+
+        //修改用户金额
+        $member = Member::findOne(['id' => $pid]);
+        $member->money = $commission;
+        $member->updated_at = time();
+        $member->save();
+        if($member->errors) {
+            \Yii::error(json_encode($member->errors));
+            \Yii::$app->db->transaction->rollBack();
+            return;
+        }
+        \Yii::$app->db->transaction->commit();
         return true;
     }
 

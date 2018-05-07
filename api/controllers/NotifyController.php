@@ -89,6 +89,7 @@ class NotifyController extends Controller
                 \Yii::$app->db->transaction->rollBack();
                 return;
             }
+
         }
 
         \Yii::$app->db->transaction->commit();
