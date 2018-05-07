@@ -4,7 +4,7 @@ namespace api\actions\member;
 
 
 use api\actions\BaseAction;
-use api\library\Wxpay\WxpayService;
+use api\library\wxpay\WxpayService;
 use api\models\CapitalDetails;
 use api\models\Member;
 use Yii;
