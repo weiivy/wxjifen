@@ -1,6 +1,6 @@
 <?php
 
-namespace api\library\Wxpay;
+namespace api\library\wxpay;
 
 /**
  * 微信支付
