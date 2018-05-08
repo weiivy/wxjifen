@@ -129,24 +129,24 @@ class WxpayService
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
         \Yii::info($postStr);
 
-        /*$postStr = '<xml><appid><![CDATA[wx347d53defefdfa69]]></appid>
+        $postStr = '<xml><appid><![CDATA[wx347d53defefdfa69]]></appid>
             <attach><![CDATA[支付]]></attach>
             <bank_type><![CDATA[CFT]]></bank_type>
             <cash_fee><![CDATA[1]]></cash_fee>
             <fee_type><![CDATA[CNY]]></fee_type>
             <is_subscribe><![CDATA[N]]></is_subscribe>
             <mch_id><![CDATA[1501565661]]></mch_id>
-            <nonce_str><![CDATA[b9aoWoY66igU61IM]]></nonce_str>
+            <nonce_str><![CDATA[IBoPF6VsDmpOOwvD]]></nonce_str>
             <openid><![CDATA[omd6J5bHKLRYkL1MEcp6WERkBauM]]></openid>
-            <out_trade_no><![CDATA[W14]]></out_trade_no>
+            <out_trade_no><![CDATA[W2]]></out_trade_no>
             <result_code><![CDATA[SUCCESS]]></result_code>
             <return_code><![CDATA[SUCCESS]]></return_code>
-            <sign><![CDATA[7EF44CD70833D9B668D1506CE3164718]]></sign>
-            <time_end><![CDATA[20180508220307]]></time_end>
+            <sign><![CDATA[ABE2BEC1DC2DB04DD892096ECDB1F871]]></sign>
+            <time_end><![CDATA[20180508222250]]></time_end>
             <total_fee>1</total_fee>
             <trade_type><![CDATA[JSAPI]]></trade_type>
-            <transaction_id><![CDATA[4200000128201805085504032171]]></transaction_id>
-            </xml>';*/
+            <transaction_id><![CDATA[4200000130201805084885900339]]></transaction_id>
+            </xml>';
 
 
         $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
