@@ -126,10 +126,10 @@ class WxpayService
             'key' => $this->key,
         );
 
-        //$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-        //\Yii::info($postStr);
+        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        \Yii::info($postStr);
 
-        $postStr = '<xml><appid><![CDATA[wx347d53defefdfa69]]></appid>
+        /*$postStr = '<xml><appid><![CDATA[wx347d53defefdfa69]]></appid>
             <attach><![CDATA[支付]]></attach>
             <bank_type><![CDATA[CFT]]></bank_type>
             <cash_fee><![CDATA[1]]></cash_fee>
@@ -146,7 +146,7 @@ class WxpayService
             <total_fee>1</total_fee>
             <trade_type><![CDATA[JSAPI]]></trade_type>
             <transaction_id><![CDATA[4200000130201805084885900339]]></transaction_id>
-            </xml>';
+            </xml>';*/
 
 
         $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
