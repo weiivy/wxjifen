@@ -19,6 +19,7 @@ class NotifyController extends Controller
         $wxpayService = new WxpayService($wxpay->mch_id, $wxpay->appid, $wxpay->key);
         $info = $wxpayService->notify();
 
+
         // $mch_id = $info->mch_id;  //微信支付分配的商户号
         // $appid = $info->appid; //微信分配的公众账号ID
         // $openid = $info->openid; //用户在商户appid下的唯一标识
@@ -46,7 +47,7 @@ class NotifyController extends Controller
         if ($wxpayResult->save()) {
             $this->processOrder($info->out_trade_no, $totalFee);
         } else {
-            \Yii::error('save wxpay_result error. ' . $wxpayResult->createCommand()->getRawSql());
+            \Yii::error('save wxpay_result error. ' . \Yii::$app->db->createCommand()->getRawSql());
         }
     }
 

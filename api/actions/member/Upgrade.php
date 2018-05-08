@@ -46,7 +46,7 @@ class Upgrade extends BaseAction
         $capitalDetails = new CapitalDetails();
         $capitalDetails->member_id = $member->id;
         $capitalDetails->type = "+";
-        $capitalDetails->status = CapitalDetails::STATUS_YES;
+        $capitalDetails->status = CapitalDetails::STATUS_NO;
         $capitalDetails->kind = $kind;
         $capitalDetails->money = $fee;
         $capitalDetails->created_at = $capitalDetails->updated_at = time();

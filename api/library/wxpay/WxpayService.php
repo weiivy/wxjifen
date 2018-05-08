@@ -129,27 +129,25 @@ class WxpayService
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
         \Yii::info($postStr);
 
-        /*
-        $postStr = '<xml>
-        <appid><![CDATA[wx00e5904efec77699]]></appid>
-        <attach><![CDATA[支付测试]]></attach>
-        <bank_type><![CDATA[CMB_CREDIT]]></bank_type>
-        <cash_fee><![CDATA[1]]></cash_fee>
-        <fee_type><![CDATA[CNY]]></fee_type>
-        <is_subscribe><![CDATA[Y]]></is_subscribe>
-        <mch_id><![CDATA[1220647301]]></mch_id>
-        <nonce_str><![CDATA[a0tZ41phiHm8zfmO]]></nonce_str>
-        <openid><![CDATA[oU3OCt5O46PumN7IE87WcoYZY9r0]]></openid>
-        <out_trade_no><![CDATA[550bf2990c51f]]></out_trade_no>
-        <result_code><![CDATA[SUCCESS]]></result_code>
-        <return_code><![CDATA[SUCCESS]]></return_code>
-        <sign><![CDATA[F6F519B4DD8DB978040F8C866C1E6250]]></sign>
-        <time_end><![CDATA[20150320181606]]></time_end>
-        <total_fee>1</total_fee>
-        <trade_type><![CDATA[JSAPI]]></trade_type>
-        <transaction_id><![CDATA[1008840847201503200034663980]]></transaction_id>
-        </xml>';
-        */
+        /*$postStr = '<xml><appid><![CDATA[wx347d53defefdfa69]]></appid>
+            <attach><![CDATA[支付]]></attach>
+            <bank_type><![CDATA[CFT]]></bank_type>
+            <cash_fee><![CDATA[1]]></cash_fee>
+            <fee_type><![CDATA[CNY]]></fee_type>
+            <is_subscribe><![CDATA[N]]></is_subscribe>
+            <mch_id><![CDATA[1501565661]]></mch_id>
+            <nonce_str><![CDATA[b9aoWoY66igU61IM]]></nonce_str>
+            <openid><![CDATA[omd6J5bHKLRYkL1MEcp6WERkBauM]]></openid>
+            <out_trade_no><![CDATA[W14]]></out_trade_no>
+            <result_code><![CDATA[SUCCESS]]></result_code>
+            <return_code><![CDATA[SUCCESS]]></return_code>
+            <sign><![CDATA[7EF44CD70833D9B668D1506CE3164718]]></sign>
+            <time_end><![CDATA[20180508220307]]></time_end>
+            <total_fee>1</total_fee>
+            <trade_type><![CDATA[JSAPI]]></trade_type>
+            <transaction_id><![CDATA[4200000128201805085504032171]]></transaction_id>
+            </xml>';*/
+
 
         $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
 
