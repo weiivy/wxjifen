@@ -126,8 +126,8 @@ class WxpayService
             'key' => $this->key,
         );
 
-        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-        \Yii::info($postStr);
+        //$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        //\Yii::info($postStr);
 
         $postStr = '<xml><appid><![CDATA[wx347d53defefdfa69]]></appid>
             <attach><![CDATA[支付]]></attach>
