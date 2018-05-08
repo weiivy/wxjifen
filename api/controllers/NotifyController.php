@@ -43,12 +43,12 @@ class NotifyController extends Controller
         $wxpayResult->time_end = $info->time_end;
         $wxpayResult->created_at = time();
         $wxpayResult->updated_at = time();
-
-        if ($wxpayResult->save()) {
-            $this->processOrder($info->out_trade_no, $totalFee);
-        } else {
+        $wxpayResult->save();
+        if($wxpayResult->errors) {
             \Yii::error('save wxpay_result error. ' . \Yii::$app->db->createCommand()->getRawSql());
+            return;
         }
+        $this->processOrder($info->out_trade_no, $totalFee);
     }
 
     /**

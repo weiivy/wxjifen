@@ -6,5 +6,13 @@ namespace api\models;
  */
 class WxpayResult extends \common\models\WxpayResult
 {
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
 
+        ];
+    }
 }
