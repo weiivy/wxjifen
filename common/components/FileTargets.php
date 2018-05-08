@@ -42,10 +42,13 @@ class FileTargets extends FileTarget
             $this->logFile = Yii::getAlias($this->logFile);
         }
         $logPath = dirname($this->logFile);
+        var_dump($logPath);
         if (!is_dir($logPath)) {
+            var_dump(mkdir($logPath, $this->dirMode, true));
             mkdir($logPath, $this->dirMode, true);
 //            FileHelper::createDirectory($logPath, $this->dirMode);
         }
+        die;
         if ($this->maxLogFiles < 1) {
             $this->maxLogFiles = 1;
         }
