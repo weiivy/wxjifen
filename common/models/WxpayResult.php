@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "pay_wxpay_result".
  *
  * @property integer $id
- * @property integer $wxpay_id
  * @property string $mch_id
  * @property string $appid
  * @property string $out_trade_no
@@ -35,7 +34,7 @@ class WxpayResult extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['wxpay_id', 'created_at', 'updated_at'], 'integer'],
+            [['created_at', 'updated_at'], 'integer'],
             [['total_fee'], 'number'],
             [['mch_id', 'appid', 'out_trade_no'], 'string', 'max' => 100],
             [['openid', 'transaction_id'], 'string', 'max' => 255],
@@ -50,7 +49,6 @@ class WxpayResult extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'wxpay_id' => 'Wxpay ID',
             'mch_id' => 'Mch ID',
             'appid' => 'Appid',
             'out_trade_no' => 'Out Trade No',
