@@ -47,7 +47,7 @@ class Help extends \yii\base\Component
         $n = \Yii::$app->security->generateRandomString(32).'.'.$ext;
         $save_path = "{$type}/{$year}/{$day}";
 
-        $path = '/uploads/'.$save_path;
+        $path = $save_path;
         self::RecursiveMkdir($path);
         return array(
             'save_path'=>$path. '/' . $n,

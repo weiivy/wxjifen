@@ -120,7 +120,7 @@ class OrderService extends Component
 
         $ext = $image->getExtension();
 
-        $path_result = Help::createItemPath('/uploads',$ext);
+        $path_result = Help::createItemPath('/uploads/',$ext);
         $image->saveAs($path_result['save_path']);
 
         $model = new OrderPhoto();

@@ -158,6 +158,7 @@ class UploadedFile extends Object
     {
         if ($this->error == UPLOAD_ERR_OK) {
             if ($deleteTempFile) {
+                var_dump($this->tempName, move_uploaded_file($this->tempName, $file));die;
                 return move_uploaded_file($this->tempName, $file);
             } elseif (is_uploaded_file($this->tempName)) {
                 return copy($this->tempName, $file);
