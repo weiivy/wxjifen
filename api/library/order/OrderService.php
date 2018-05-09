@@ -114,7 +114,6 @@ class OrderService extends Component
     public static function uploadFile($orderId =1)
     {
         $image = UploadedFile::getInstanceByName('file');
-        var_dump(is_uploaded_file($_FILES['file']['tempName']));die;
         var_dump($image, $_FILES);die;
         if($image == false){
             throw new \Exception('文件上传失败', 0);
