@@ -64,4 +64,21 @@ class Order extends \common\models\Order
         $banks = static::bankParams();
         return isset($banks[$bank]) ? $banks[$bank] : null;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['member_id', 'integral', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['money'], 'number'],
+            [['valid_time'], 'safe'],
+            [['remark'], 'string'],
+            [['out_trade_no'], 'string', 'max' => 32],
+            [['bank'], 'string', 'max' => 50],
+            [['exchange_code'], 'string', 'max' => 255],
+        ];
+    }
+
 }
