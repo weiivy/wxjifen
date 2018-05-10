@@ -291,7 +291,6 @@ class WxpayService
 
     public static function curlPost($url = '', $postData = '', $options = array())
     {
-        var_dump($options);die;
         if (is_array($postData)) {
             $postData = http_build_query($postData);
         }
