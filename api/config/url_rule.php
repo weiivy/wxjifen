@@ -16,6 +16,8 @@ return [
     'POST member'                                                => 'member/member',
     'POST friends'                                               => 'member/friends',
     'POST add-order'                                             => 'record/add-order',
-    'POST pay/notify'                                             => 'notify/notify',
-    'POST upgrade'                                             => 'member/upgrade',
+    'POST pay/notify'                                            => 'notify/notify',
+    'POST upgrade'                                               => 'member/upgrade',
+    'POST get-money'                                             => 'member/get-money',
+    'POST pay-back'                                             => 'site/pay-back',
 ];

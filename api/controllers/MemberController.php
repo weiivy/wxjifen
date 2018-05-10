@@ -17,6 +17,7 @@ class MemberController extends Controller
             'friends' => 'api\actions\member\GetFriends',
             'add-order' => 'api\actions\order\AddOrder',
             'upgrade' => 'api\actions\member\Upgrade',
+            'get-money' => 'api\actions\member\GetMoney',
         ];
     }
 }

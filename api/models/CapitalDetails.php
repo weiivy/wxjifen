@@ -12,6 +12,7 @@ class CapitalDetails extends \common\models\CapitalDetails
     const KIND_10 = 10; //提现
     const KIND_20 = 20; //提成
     const KIND_30 = 30; //升级返现
+    const KIND_31 = 31; //升级
     const KIND_40 = 40; //提现
 
     const STATUS_YES = 1; //支付
@@ -30,6 +31,7 @@ class CapitalDetails extends \common\models\CapitalDetails
             static::KIND_10 => '提现',
             static::KIND_20 => '提成',
             static::KIND_30 => '升级返现',
+            static::KIND_31 => '升级',
             static::KIND_40 => '提现'
         ];
         return isset($array[$kind]) ? $array[$kind] : null;

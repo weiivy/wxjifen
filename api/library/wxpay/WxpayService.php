@@ -185,6 +185,86 @@ class WxpayService
     }
 
     /**
+     * @param string $openid 调用【网页授权获取用户信息】接口获取到用户在该公众号下的Openid
+     * @param float $amount 收款总费用 单位元
+     * @return array
+     * @throws \Exception
+     */
+    public function payback($openid, $amount)
+    {
+        $config = array(
+            'mch_id' => $this->mchid,
+            'appid' => $this->appid,
+            'key' => $this->key,
+        );
+
+        $unified = array(
+            'mch_appid' => $config['appid'],
+            'mchid' => $config['mch_id'],
+            'nonce_str' => self::createNonceStr(),
+            'partner_trade_no' => time() . mt_rand(10000, 99999),
+            'openid' => $openid,
+            'check_name' => 'FORCE_CHECK', //强制验证真实姓名
+            're_user_name' => '张唯唯', //真实姓名
+            'amount' => $amount * 100,     //单位 转为分
+            'desc' => '用户零钱提现',
+            'spbill_create_ip' => $_SERVER['REMOTE_ADDR'],
+        );
+
+        $unified['sign'] = self::getSign($unified, $config['key']);
+        $options = [
+            CURLOPT_SSLCERT => \Yii::$app->getBasePath() . '/ca/apiclient_cert.pem',
+            CURLOPT_SSLKEY  => \Yii::$app->getBasePath() . '/ca/apiclient_key.pem'
+        ];
+        $responseXml = self::curlPost('https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers', self::arrayToXml($unified), $options);
+//        $responseXml = self::curlPost('https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers', $str);
+        echo $responseXml;die;
+        /*
+        <xml>
+        <return_code><![CDATA[SUCCESS]]></return_code>
+        <return_msg><![CDATA[OK]]></return_msg>
+        <appid><![CDATA[wx00e5904efec77699]]></appid>
+        <mch_id><![CDATA[1220647301]]></mch_id>
+        <nonce_str><![CDATA[1LHBROsdmqfXoWQR]]></nonce_str>
+        <sign><![CDATA[ACA7BC8A9164D1FBED06C7DFC13EC839]]></sign>
+        <result_code><![CDATA[SUCCESS]]></result_code>
+        <prepay_id><![CDATA[wx2015032016590503f1bcd9c30421762652]]></prepay_id>
+        <trade_type><![CDATA[JSAPI]]></trade_type>
+        </xml>
+        */
+
+        $unifiedOrder = simplexml_load_string($responseXml, 'SimpleXMLElement', LIBXML_NOCDATA);
+
+        if ($unifiedOrder === false) {
+            throw new \Exception('parse xml error', 0);
+        }
+        if ($unifiedOrder->return_code != 'SUCCESS') {
+            throw new \Exception($unifiedOrder->return_msg);
+        }
+        if ($unifiedOrder->result_code != 'SUCCESS') {
+            throw new \Exception($unifiedOrder->err_code);
+            /*
+            NOAUTH  商户无此接口权限
+            NOTENOUGH  余额不足
+            ORDERPAID  商户订单已支付
+            ORDERCLOSED  订单已关闭
+            SYSTEMERROR  系统错误
+            APPID_NOT_EXIST     APPID不存在
+            MCHID_NOT_EXIST  MCHID不存在
+            APPID_MCHID_NOT_MATCH appid和mch_id不匹配
+            LACK_PARAMS 缺少参数
+            OUT_TRADE_NO_USED 商户订单号重复
+            SIGNERROR 签名错误
+            XML_FORMAT_ERROR XML格式错误
+            REQUIRE_POST_METHOD 请使用post方法
+            POST_DATA_EMPTY post数据为空
+            NOT_UTF8 编码格式错误
+           */
+        }
+        return (array)$unifiedOrder;
+    }
+
+    /**
      * curl get
      *
      * @param string $url
@@ -211,6 +291,7 @@ class WxpayService
 
     public static function curlPost($url = '', $postData = '', $options = array())
     {
+        var_dump($options);die;
         if (is_array($postData)) {
             $postData = http_build_query($postData);
         }
@@ -225,10 +306,11 @@ class WxpayService
         }
 
         //https请求 不验证证书和host
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 
         $data = curl_exec($ch);
+        echo curl_errno($ch);;die;
         curl_close($ch);
         return $data;
     }

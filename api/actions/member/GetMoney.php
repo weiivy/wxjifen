@@ -18,7 +18,7 @@ class GetMoney extends BaseAction
         $member = Member::find()->select('money')->where(['openid'=> $openId])->asArray()->one();
         return [
             'status' => 200,
-            'data' => (float)$member['money']
+            'data' => number_format($member['money'], 2)
         ];
     }
 }
