@@ -214,7 +214,7 @@ class WxpayService
         $unified['sign'] = self::getSign($unified, $config['key']);
         $options = [
             CURLOPT_SSLCERT => '/data/cert/ca/apiclient_cert.pem',
-            CURLOPT_SSLKEY  => 'data/cert/ca/apiclient_key.pem'
+            CURLOPT_SSLKEY  => '/data/cert/ca/apiclient_key.pem'
         ];
         $responseXml = self::curlPost('https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers', self::arrayToXml($unified), $options);
 //        $responseXml = self::curlPost('https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers', $str);
