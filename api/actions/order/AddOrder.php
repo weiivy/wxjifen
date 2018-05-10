@@ -17,8 +17,6 @@ class AddOrder extends BaseAction
     public function run()
     {
         $body = \Yii::$app->getRequest()->getBodyParams();
-        var_dump($_FILES);
-        sleep(60);die;
         Yii::$app->db->beginTransaction();
         try{
             $orderId = OrderService::saveOrder($body);
