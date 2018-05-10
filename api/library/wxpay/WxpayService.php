@@ -309,7 +309,6 @@ class WxpayService
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 
         $data = curl_exec($ch);
-        echo curl_errno($ch);;die;
         curl_close($ch);
         return $data;
     }
