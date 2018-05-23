@@ -120,12 +120,13 @@ class OrderService extends Component
 
         $ext = $image->getExtension();
 
-        $path_result = Help::createItemPath('/uploads/',$ext);
+        $path_result = Help::createItemPath('/uploads',$ext);
         $image->saveAs(\Yii::$app->getBasePath() . $path_result['save_path']);
 
         $model = new OrderPhoto();
         $model->order_id = $orderId;
-        $model->image = $path_result['web_path'];
+        $imagePath = str_replace('/uploads', '', $path_result['web_path']);
+        $model->image = \Yii::$app->params['uploadUrl'] . $imagePath;
         $model->save();
         if($model->errors) {
            throw new \Exception("报单失败", 0);
