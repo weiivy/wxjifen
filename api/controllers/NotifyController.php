@@ -86,7 +86,7 @@ class NotifyController extends Controller
 
         //升级返佣
         if($capitalDetails->kind == CapitalDetails::KIND_30) {
-            if(!CapitalDetailsService::upgradeRebate($capitalDetails->member_id)) {
+            if(!CapitalDetailsService::upgradeRebate($capitalDetails->member_id, $totalFee)) {
                 \Yii::error("记录" . $outTradeNo . "升级返佣失败");
                 \Yii::$app->db->transaction->rollBack();
                 return;

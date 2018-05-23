@@ -5,25 +5,23 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "pre_bank_config".
+ * This is the model class for table "pre_bank".
  *
  * @property integer $id
  * @property string $bank
- * @property integer $type
- * @property string $money
- * @property integer $score
+ * @property string $bank_name
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
  */
-class BankConfig extends \yii\db\ActiveRecord
+class Bank extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'pre_bank_config';
+        return 'pre_bank';
     }
 
     /**
@@ -32,9 +30,9 @@ class BankConfig extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type', 'score', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['money'], 'number'],
+            [['status', 'created_at', 'updated_at'], 'integer'],
             [['bank'], 'string', 'max' => 20],
+            [['bank_name'], 'string', 'max' => 100],
         ];
     }
 
@@ -46,9 +44,7 @@ class BankConfig extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'bank' => 'Bank',
-            'type' => 'Type',
-            'money' => 'Money',
-            'score' => 'Score',
+            'bank_name' => 'Bank Name',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

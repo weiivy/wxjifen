@@ -53,17 +53,23 @@ class CapitalDetailsService extends Component
      * @author Ivy Zhang<ivyzhang@lulutrip.com>
      * @copyright 2018-05-04
      * @param $memberId
+     * @param $totalFee
      * @return bool
      */
-    public static function upgradeRebate($memberId)
+    public static function upgradeRebate($memberId, $totalFee)
     {
+        $addFee = [
+            '198' => 120,
+            '998' => 600,
+            '0.01' => 0
+        ];
         //检查该用户是否有父级
         $pid = MemberService::getPid($memberId);
         if( $pid === 0) {
             return true;
         }
 
-        $addFee = 120;
+        $addFee = $addFee[$totalFee];
         \Yii::$app->db->beginTransaction();
         //有父级给父级返佣
         $capitalDetails = new CapitalDetails();
@@ -113,6 +119,12 @@ class CapitalDetailsService extends Component
             return true;
         }
 
+        $currentMember = Member::findOne(['id' => $order->member_id]);
+        $topMember = Member::findOne(['id' => $pid]);
+        if($currentMember->grade <= $topMember->grade) {
+            return true;
+        }
+
         //获取银行配置点数
         $bankConfig = BankConfig::findOne(['bank' => $order->bank]);;
         if(empty($bankConfig)) return true;
@@ -120,6 +132,8 @@ class CapitalDetailsService extends Component
         \Yii::$app->db->beginTransaction();
         //有父级给父级提成
         $commission = round((($bankConfig->money / $bankConfig->score) * $order->integral), 2);
+        $commission =  round(($bankConfig->money - $commission) * 0.01, 2);
+
         $capitalDetails = new CapitalDetails();
         $capitalDetails->member_id = $pid;
         $capitalDetails->type = "+";
