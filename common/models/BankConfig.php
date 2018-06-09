@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "pre_bank_config".
  *
  * @property integer $id
- * @property string $bank
+ * @property string $bank_id
  * @property integer $type
  * @property string $money
  * @property integer $score
@@ -32,9 +32,8 @@ class BankConfig extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type', 'score', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['type', 'score', 'status', 'created_at', 'updated_at', 'bank_id'], 'integer'],
             [['money'], 'number'],
-            [['bank'], 'string', 'max' => 20],
         ];
     }
 
@@ -45,7 +44,7 @@ class BankConfig extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'bank' => 'Bank',
+            'bank_id' => 'Bank Id',
             'type' => 'Type',
             'money' => 'Money',
             'score' => 'Score',

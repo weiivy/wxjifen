@@ -20,4 +20,5 @@ return [
     'POST upgrade'                                               => 'member/upgrade',
     'POST get-money'                                             => 'member/get-money',
     'POST pay-back'                                             => 'site/pay-back',
+    'GET  bank-info'                                             => 'site/bank-info',
 ];

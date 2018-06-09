@@ -22,8 +22,7 @@ class GetOrderList extends BaseAction
         $page = $page > 0 ? $page : 1;
         $pageSize = Yii::$app->request->post('pageSize', 10);
         $status = Yii::$app->request->post('status');
-        $openid = Yii::$app->request->post('openid');
-        $memberId = MemberService::getMemberByOpenid($openid);
+        $memberId = $this->memberId;
         return [
             'status' => 200,
             'data'   => OrderService::getList($page, $pageSize, $status, $memberId)

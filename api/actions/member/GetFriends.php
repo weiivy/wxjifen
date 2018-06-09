@@ -16,11 +16,10 @@ class GetFriends extends BaseAction
 {
     public function run()
     {
-        $openid = Yii::$app->request->post('openid');
         $page = Yii::$app->request->post('page');
         $page = $page > 0 ? $page : 1;
         $pageSize = Yii::$app->request->post('pageSize', 10);
-        $memberId = MemberService::getMemberByOpenid($openid);
+        $memberId = $this->memberId;
         return [
             'status' => 200,
             'data'   => MemberService::getFriends($memberId, $page, $pageSize)

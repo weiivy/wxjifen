@@ -66,7 +66,7 @@ class OrderService extends Component
         $order = new Order();
         $order->out_trade_no = $outTradeNo;
         $order->member_id = $post['member_id'];
-        $order->bank = $post['bank'];
+        $order->bank_id = $post['bank_id'];
         $order->integral = $post['score'];
         if(!empty($post['exchange_code'])) $order->exchange_code = $post['exchange_code'];
         if(isset($post['valid_time']) && $post['valid_time'] != '请选择有效期') $order->valid_time = $post['valid_time'];

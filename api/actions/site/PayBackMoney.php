@@ -44,7 +44,7 @@ class PayBackMoney extends BaseAction
             }
             return ['status' => 200, 'message' => "提现成功"];
         } catch (\Exception $e){
-            return ['status' => $e->getMessage(), 'message' => $e->getMessage()];
+            return ['status' => $e->getCode(), 'message' => $e->getMessage()];
         }
 
     }

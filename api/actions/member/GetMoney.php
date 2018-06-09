@@ -14,8 +14,8 @@ class GetMoney extends BaseAction
 {
     public function run()
     {
-        $openId = Yii::$app->request->post('openid');
-        $member = Member::find()->select('money')->where(['openid'=> $openId])->asArray()->one();
+        $memberId = $this->memberId;
+        $member = Member::find()->select('money')->where(['id'=> $memberId])->asArray()->one();
         return [
             'status' => 200,
             'data' => number_format($member['money'], 2)

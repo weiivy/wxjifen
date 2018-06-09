@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $out_trade_no
  * @property integer $member_id
- * @property string $bank
+ * @property integer $bank_id
  * @property integer $integral
  * @property string $money
  * @property string $exchange_code
@@ -36,12 +36,11 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['member_id', 'integral', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['member_id', 'integral', 'status', 'created_at', 'updated_at', 'bank_id'], 'integer'],
             [['money'], 'number'],
             [['valid_time'], 'safe'],
             [['remark'], 'string'],
             [['out_trade_no'], 'string', 'max' => 32],
-            [['bank'], 'string', 'max' => 50],
             [['exchange_code'], 'string', 'max' => 255],
         ];
     }
@@ -55,7 +54,7 @@ class Order extends \yii\db\ActiveRecord
             'id' => 'ID',
             'out_trade_no' => 'Out Trade No',
             'member_id' => 'Member ID',
-            'bank' => 'Bank',
+            'bank_id' => 'Bank Id',
             'integral' => 'Integral',
             'money' => 'Money',
             'exchange_code' => 'Exchange Code',

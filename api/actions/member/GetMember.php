@@ -18,10 +18,9 @@ class GetMember extends BaseAction
 {
     public function run()
     {
-        $openid = Yii::$app->request->post('openid');
-
+        $memberId = $this->memberId;
         //用户信息
-        $member = Member::find()->where(['openid' => $openid, 'status' => Member::status_10])->asArray()->one();
+        $member = Member::find()->where(['id' => $memberId, 'status' => Member::status_10])->asArray()->one();
         if(empty($member)) return ['status' => 200, 'message' => 'openid错误'];
         $member['grade'] = Member::gradeAlisa($member['grade']);
         $data = [

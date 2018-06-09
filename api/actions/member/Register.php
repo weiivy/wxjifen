@@ -26,8 +26,8 @@ class Register extends BaseAction
                 throw new \Exception("验证码已失效", 0);
             }
             //验证密码
-            if(!preg_match('/^[a-zA-Z\d_]{8,}$/', $post['password'])) {
-                throw new \Exception("密码必须是由数字字母下划线组成的8位字符", 0);
+            if(!preg_match('/^[a-zA-Z\d_]{6,30}$/i', $post['password'])) {
+                throw new \Exception("密码由数字字母下划线组成", 0);
             }
 
             if($post['password'] != $post['repassword']) {

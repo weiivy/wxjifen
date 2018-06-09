@@ -4,6 +4,7 @@ namespace api\actions\site;
 
 
 use api\actions\BaseAction;
+use api\models\Bank;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -141,17 +142,15 @@ class GetBankConfig extends BaseAction
 
     public function run()
     {
-        $bank = Yii::$app->request->post('bank');
-        if(isset($this->bankConfigs[$bank])) {
-            return [
-                'status' => 200,
-                'data'   => $this->bankConfigs[$bank]
-            ];
+        $bankId = Yii::$app->request->post('bankId');
+        $bank = Bank::findOne(['id' => $bankId]);
+        $data = [];
+        if(!empty($bank) && isset($this->bankConfigs[$bank->bank])) {
+            $data = $this->bankConfigs[$bank->bank];
         }
-
         return [
-            'status' => 0,
-            'data'   => []
+            'status' => 200,
+            'data'   => $data
         ];
 
     }

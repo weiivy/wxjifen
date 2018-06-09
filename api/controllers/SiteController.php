@@ -21,6 +21,7 @@ class SiteController extends Controller
             'check-member' => 'api\actions\site\CheckMember',
             'get-mobile' => 'api\actions\site\GetMobile',
             'pay-back' => 'api\actions\site\PayBackMoney',
+            'bank-info' => 'api\actions\site\GetBankInfo',
         ];
     }
 }
