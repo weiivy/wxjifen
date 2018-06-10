@@ -71,12 +71,11 @@ class Order extends \common\models\Order
     public function rules()
     {
         return [
-            [['member_id', 'integral', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['member_id','bank_id', 'integral', 'status', 'created_at', 'updated_at'], 'integer'],
             [['money'], 'number'],
             [['valid_time'], 'safe'],
             [['remark'], 'string'],
             [['out_trade_no'], 'string', 'max' => 32],
-            [['bank'], 'string', 'max' => 50],
             [['exchange_code'], 'string', 'max' => 255],
         ];
     }
