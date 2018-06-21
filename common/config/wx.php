@@ -1,8 +1,8 @@
 <?php
 return [
     'developer' => [
-        'appId' => 'wx347d53defefdfa69',
-        'appSecret' => '5a3ccea71a88bc2c4d14d0224877b8a2',
+        'appId' => 'wxd487a0dc8db164d3',
+        'appSecret' => '7ee8df8b07ee2fe28d6098f7c4b3b311',
         'token' => 'jifen',
         'DebugAppId' => 'wx347d53defefdfa69',   // 【微信测试号】AppId
         'Debugappsecret' => '5a3ccea71a88bc2c4d14d0224877b8a2', // 【微信测试号】AppSecret
@@ -23,7 +23,7 @@ return [
 
 // 微信支付配置
     'wxPayConfig' => [
-        'appid' => 'wx347d53defefdfa69',
+        'appid' => 'wxd487a0dc8db164d3',
         'appkey' => 'cVurY00eEAQ9Xnt4SYmaNE1jJJdGhDUENL8hg8bTJMVZUPLxBhlLoFrh5PCvqvPPVEgdeXBPwxHHp0aRRIrVlttx5QQTmY572pKGSOR07e9LvWIPblN0oBevCqH3V6r0', // PaySign Key
         'signtype' => 'SHA1',
         'partnerid' => '1235468601', // deprecated: wxpay api upgrade

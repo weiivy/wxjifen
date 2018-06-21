@@ -36,11 +36,9 @@ class Register extends BaseAction
 
             //保存数据
             $member = MemberService::saveMember($post);
-            $member['gradeAlisa'] = Member::gradeAlisa($member['grade']);
             return [
                 'status'  => 200,
                 'message' => "注册成功",
-                'data'    => $member
             ];
         }catch (\Exception $e){
             return [

@@ -62,17 +62,18 @@ class MemberService extends Component
         }
 
         //根据openid获取信息
-        $userInfo = Contact::findOne(['openid' => $post['openid']]);
-        if(empty($userInfo)) {
-            throw  new \Exception("注册失败", 0);
-        }
+        if(!empty($post['openid'])) $userInfo = Contact::findOne(['openid' => $post['openid']]);
+
 
         //保存用户注册信息
         $member = new Member();
-        $member->openid = $post['openid'];
         $member->mobile = $post['mobile'];
-        $member->nickname = $userInfo->nickname;
-        $member->avatar = $userInfo->head_image;
+        if(!empty($userInfo)) {
+            $member->openid = $post['openid'];
+            $member->nickname = $userInfo->nickname;
+            $member->avatar = $userInfo->head_image;
+        }
+
         static::generatePasswordSalt();
         $member->password_hash = static::generatePasswordHash($post['password']);
         $member->password_salt = static::$passwordSalt;
@@ -106,7 +107,7 @@ class MemberService extends Component
      * @param $password
      * @return string
      */
-    private static function generatePasswordHash($password)
+    public static function generatePasswordHash($password)
     {
         return md5($password . static::$passwordSalt);
     }

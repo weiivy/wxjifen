@@ -18,6 +18,7 @@ class MemberController extends Controller
             'add-order' => 'api\actions\order\AddOrder',
             'upgrade' => 'api\actions\member\Upgrade',
             'get-money' => 'api\actions\member\GetMoney',
+            'upload-avatar' => 'api\actions\member\UpdateImg',
         ];
     }
 }

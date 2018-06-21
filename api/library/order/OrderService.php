@@ -109,27 +109,42 @@ class OrderService extends Component
      * @author Ivy Zhang<ivyzhang@lulutrip.com>
      * @copyright 2018-04-16
      * @param int $orderId
+     * @param array $files
      * @throws \Exception
      */
-    public static function uploadFile($orderId =1)
+    public static function uploadFile($orderId ,$files)
     {
-        $image = UploadedFile::getInstanceByName('file');
-        if($image == false){
-            throw new \Exception('文件上传失败', 0);
+        $tran = \Yii::$app->db->beginTransaction();
+        foreach ($files as $value){
+            $model = new OrderPhoto();
+            $model->order_id = $orderId;
+            $imagePath = '/uploads/product/' . $value;
+            $model->image = \Yii::$app->params['uploadUrl'] . $imagePath;
+            $model->save();
+            if($model->errors) {
+                $tran->rollBack();
+                throw new \Exception("报单失败", 0);
+            }
+            static::savePicture($value);
         }
+        $tran->commit();
 
-        $ext = $image->getExtension();
+    }
 
-        $path_result = Help::createItemPath('/uploads',$ext);
-        $image->saveAs(\Yii::$app->getBasePath() . $path_result['save_path']);
+    /**
+     * 保存Picture图片文件(从临时目录移到对应目录)
+     */
+    protected static function savePicture( $image)
+    {
+        // 上传临时目录
+        $baseTemp = dirname(\Yii::$app->getBasePath()) . '/tmp/product';
 
-        $model = new OrderPhoto();
-        $model->order_id = $orderId;
-        $imagePath = str_replace('/uploads', '', $path_result['web_path']);
-        $model->image = \Yii::$app->params['uploadUrl'] . $imagePath;
-        $model->save();
-        if($model->errors) {
-           throw new \Exception("报单失败", 0);
-        }
+        // 移动到目标目录
+        $baseTarget = dirname(\Yii::$app->getBasePath()) . '/uploads/product';
+
+        // 主图
+        @mkdir(dirname($baseTarget . $image), 0777, true);
+        rename($baseTemp . $image, $baseTarget . $image);
+
     }
 }

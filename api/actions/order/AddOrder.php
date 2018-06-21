@@ -16,14 +16,15 @@ class AddOrder extends BaseAction
 {
     public function run()
     {
-        $body = \Yii::$app->getRequest()->getBodyParams();
+        $info = Yii::$app->request->post('info');
+        $files = Yii::$app->request->post('files');
         Yii::$app->db->beginTransaction();
         try{
-            $orderId = OrderService::saveOrder($body);
+            $orderId = OrderService::saveOrder($info);
 
 
             //验证图片信息
-            OrderService::uploadFile($orderId);
+            OrderService::uploadFile($orderId,$files);
             Yii::$app->db->transaction->commit();
 
             return [

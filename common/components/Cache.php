@@ -27,6 +27,11 @@ class Cache extends Component
         Yii::$app->$config->setex($key, $time, $value);
         return true;
     }
+    public function forget($key)
+    {
+        $config = $this->config;
+        return Yii::$app->$config->del($key);
+    }
 
     public function rPush($key,$value)
     {

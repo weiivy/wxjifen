@@ -22,7 +22,6 @@ class Ucpaas
 
 
 
-
     public function  __construct($options)
     {
         if (is_array($options) && !empty($options)) {

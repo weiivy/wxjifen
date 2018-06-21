@@ -23,6 +23,7 @@ class GetMember extends BaseAction
         $member = Member::find()->where(['id' => $memberId, 'status' => Member::status_10])->asArray()->one();
         if(empty($member)) return ['status' => 200, 'message' => 'openid错误'];
         $member['grade'] = Member::gradeAlisa($member['grade']);
+        $member['avatar'] = Yii::$app->params['uploadUrl'] . $member['avatar'];
         $data = [
             'member' => $member
         ];

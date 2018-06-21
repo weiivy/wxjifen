@@ -50,4 +50,47 @@ class Member extends \common\models\Member
         ];
         return isset($array[$status]) ? $array[$status] : null;
     }
+
+    /**
+     * 缩略图
+     * @return array
+     */
+    public static function getThumbParams()
+    {
+        $thumb = [
+            '1' => ['w' => 100, 'h' => 100,'cut' => true],
+        ];
+
+        return empty($thumb) ? null : $thumb;
+    }
+
+    /**
+     * 返回图片存储目录
+     * @return string
+     */
+    public static function getImagePath()
+    {
+        $str = 'uploads/avatar';
+        return strlen($str) > 0 ? $str : null;
+    }
+
+    /**
+     * 获取缩略图文件名
+     * @param $thumb string 缩略图
+     * @return string
+     */
+    public function getThumb($thumb = null)
+    {
+        if(empty($this->avatar)){
+            return '';
+        }
+
+        if($thumb === null){
+            return $this->avatar;
+        }
+
+        $baseName = basename($this->avatar);
+        $path = dirname($this->avatar);
+        return $path . '/' . $thumb . '/' . $baseName;
+    }
 }
