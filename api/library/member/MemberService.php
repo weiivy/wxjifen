@@ -17,7 +17,7 @@ use Yii;
  */
 class MemberService extends Component
 {
-    private static $passwordSalt;
+    public static $passwordSalt;
     /**
      * 保存粉丝悉尼下
      * @author Ivy Zhang<ivyzhang@lulutrip.com>

@@ -24,6 +24,7 @@ class Login extends BaseAction
             }
 
             //验证密码
+            MemberService::$passwordSalt = $member['password_salt'];
             if(MemberService::generatePasswordHash($password) != $member['password_hash']) {
                 throw  new \Exception('登录密码错误', 0);
             }
