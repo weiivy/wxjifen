@@ -132,8 +132,6 @@ class UploadedFile
      */
     public function doUpload($file = 'files')
     {
-        $request = $this->request;
-
         // 允许上传文件大小 (M)
         $maxSize = $this->maxSize;
 
@@ -151,7 +149,6 @@ class UploadedFile
             $this->message = '没有上传文件';
             return false;
         }
-
 
 
         if ($file == null) {

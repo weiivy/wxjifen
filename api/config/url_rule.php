@@ -5,7 +5,7 @@
  * @author Serena Liu<serena.liu@ipptravel.com>
  */
 return [
-    'POST  login'                                                => 'site/wxlogin',
+    'POST  login'                                                => 'member/login',
     'POST sendSms'                                               => 'site/sendSms',
     'POST check-member'                                          => 'site/check-member',
     'POST get-mobile'                                            => 'site/get-mobile',
@@ -22,4 +22,5 @@ return [
     'POST pay-back'                                             => 'site/pay-back',
     'GET  bank-info'                                             => 'site/bank-info',
     'POST  upload-avatar'                                        => 'member/upload-avatar',
+    'POST  upload-product'                                        => 'site/upload-product',
 ];

@@ -21,6 +21,7 @@ class UploadImage extends BaseAction
             $up->basePath = 'tmp/product/';
             $up->subPath = @date('Ym') . '/' . @date('d') . '/';
 
+
             if (!$up->doUpload('file')) {
                 throw new \Exception($up->getError(), 0);
             }

@@ -11,6 +11,7 @@ class MemberController extends Controller
     {
         return [
             'register' => 'api\actions\member\Register',
+            'login' => 'api\actions\member\Login',
             'get-capital-detail' => 'api\actions\member\GetCapitalDetail',
             'get-orders' => 'api\actions\member\GetOrderList',
             'member' => 'api\actions\member\GetMember',
