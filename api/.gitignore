@@ -17,3 +17,5 @@ web/index.php
 *.tags_sorted_by_file
 /git-checkout.cmd
 dump.rdb
+uploads
+web/tmp

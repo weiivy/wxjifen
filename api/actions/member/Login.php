@@ -23,7 +23,9 @@ class Login extends BaseAction
             }
 
             //获取用户信息
-            $member = Member::find()->where('mobile=:mobile',[':mobile' => $mobile])->asArray()->one();
+            $member = Member::find()
+                ->select("id, mobile,openid,nickname,avatar,status,grade,pid,money")
+                ->where('mobile=:mobile',[':mobile' => $mobile])->asArray()->one();
             if(empty($member)) {
                 throw  new \Exception("电话为{$mobile}的用户不存在", 0);
             }

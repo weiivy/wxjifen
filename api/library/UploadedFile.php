@@ -1,8 +1,6 @@
 <?php
 namespace api\library;
 use common\components\Image;
-use yii\helpers\FileHelper;
-
 
 /**
      * 文件上传类
@@ -199,7 +197,7 @@ class UploadedFile
             //文件名
             $basename = uniqid() . '.' . strtolower($originalExtension);
             $basePath = $this->rootPath . $this->basePath . $this->subPath;
-            if(!file_exists($basePath)) FileHelper::createDirectory($basePath, '0775', true);
+            Help::recursiveMkdir($basePath, 0775);
             $file->saveAs($basePath . $basename);
 
             $arr = array(

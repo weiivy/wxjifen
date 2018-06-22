@@ -34,10 +34,10 @@ class Help extends \yii\base\Component
      * 递归建立文件夹
      * @author abei
      */
-    public static function RecursiveMkdir($path){
+    public static function recursiveMkdir($path){
         if (!file_exists($path)) {
             self::RecursiveMkdir(dirname($path));
-            mkdir(\Yii::$app->getBasePath() . $path, 0777, true);
+            mkdir($path, 0775, true);
         }
     }
 
@@ -48,7 +48,7 @@ class Help extends \yii\base\Component
         $save_path = "{$type}/{$year}/{$day}";
 
         $path = $save_path;
-        self::RecursiveMkdir($path);
+        self::recursiveMkdir($path);
         return array(
             'save_path'=>$path. '/' . $n,
             'web_path'=>$save_path. '/' . $n
