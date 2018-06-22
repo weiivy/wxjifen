@@ -30,8 +30,8 @@ class UploadImage extends BaseAction
             $result = array(
                 'status' => 200,
                 'files' => [
-                    'url'   => \Yii::$app->params['uploadUrl'] . $files['url'],
-                    'image' => str_replace('mp/product/', '', $files['url'])
+                    'url'   => \Yii::$app->params['uploadUrl'] . $files[0]['url'],
+                    'image' => $files[0]['url']
                 ],
                 'message' => '上传成功'
             );

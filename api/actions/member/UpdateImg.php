@@ -21,9 +21,9 @@ class UpdateImg extends BaseAction
             }
 
             $files = $up->getFiles();
-             $member = Member::findOne(['id' => $this->memberId]);
+            $member = Member::findOne(['id' => $this->memberId]);
             $memberOld = clone $member;
-            $member->avatar = $files['thumbnailUrl'];
+            $member->avatar = $files[0]['thumbnailUrl'];
             $member->save();
 
             if($member->errors) throw new \Exception($member->getFirstError(), 0);
