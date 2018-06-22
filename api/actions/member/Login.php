@@ -33,7 +33,7 @@ class Login extends BaseAction
             if(!empty($member['avatar'])) {
                 $member['avatar'] = preg_match('/http/', $member['avatar']) ? $member['avatar'] : Yii::$app->params['uploadUrl'] . $member['avatar'];
             } else {
-                $member['avatar'] = Yii::$app->params['uploadUrl'] . '/images/logo.jpg';
+                $member['avatar'] = Yii::$app->params['staticUrl'] . '/logo.jpg';
             }
             return [
                 'status' => 200,

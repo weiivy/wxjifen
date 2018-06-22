@@ -41,7 +41,7 @@ class Register extends BaseAction
                     $member['avatar'] = preg_match('/http/', $member['avatar']) ? $member['avatar'] : Yii::$app->params['uploadUrl'] . $member['avatar'];
 
                 }else {
-                    $member['avatar'] = Yii::$app->params['uploadUrl'] . '/images/logo.jpg';
+                    $member['avatar'] = Yii::$app->params['staticUrl'] . '/logo.jpg';
                 }
             }
             return [
