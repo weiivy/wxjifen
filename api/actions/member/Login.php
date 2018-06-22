@@ -14,14 +14,7 @@ class Login extends BaseAction
     {
         $mobile = Yii::$app->request->post('mobile');
         $password = Yii::$app->request->post('password');
-        $code = Yii::$app->request->post('code');
         try{
-            //验证验证码
-            $verifyCode = Yii::$app->cache->get('verifyCode');
-            if($code != $verifyCode) {
-                throw new \Exception("验证码已失效", 0);
-            }
-
             //获取用户信息
             $member = Member::find()
                 ->select("id, mobile,openid,nickname,avatar,status,grade,pid,money")

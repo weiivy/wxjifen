@@ -18,7 +18,7 @@ class UploadImage extends BaseAction
         try{
             $up = new UploadedFile();
             $up->thumb = [];
-            $up->basePath = 'tmp/product/';
+            $up->basePath = 'runtime/product/';
             $up->subPath = @date('Ym') . '/' . @date('d') . '/';
 
 

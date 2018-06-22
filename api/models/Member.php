@@ -70,7 +70,7 @@ class Member extends \common\models\Member
      */
     public static function getImagePath()
     {
-        $str = 'uploads/avatar';
+        $str = 'uploads/avatar/';
         return strlen($str) > 0 ? $str : null;
     }
 

@@ -65,7 +65,7 @@ class UploadedFile
         }
 
         if ($this->rootPath === null) {
-            $this->rootPath = realpath('.') . '/';
+            $this->rootPath = realpath('../') . '/';
         } else {
             $this->rootPath = trim($this->rootPath, '/\\') . '/';
         }
@@ -136,13 +136,6 @@ class UploadedFile
 
         // 允许上传的扩展名
         $extensionName = $this->extensionName;
-
-        //$request->files
-        //Symfony\Component\HttpFoundation\FileBag
-
-        //$request->files->get('files'))
-        //null 、array 、Symfony\Component\HttpFoundation\File\UploadedFile
-
         $file =  \yii\web\UploadedFile::getInstanceByName($file);
         if ($file === null) {
             $this->message = '没有上传文件';
