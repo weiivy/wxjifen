@@ -82,6 +82,7 @@ class MemberService extends Component
         $member->created_at = $member->updated_at = $time;
         $member->save();
         if($member->errors) {
+            Yii::error(json_encode($member->errors));
             throw new \Exception("保存失败");
         }
         $id = Yii::$app->db->getLastInsertID();
