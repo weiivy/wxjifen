@@ -30,7 +30,11 @@ class Login extends BaseAction
             }
 
             unset($member['password_salt'], $member['password_hash']);
-            $member['avatar'] = preg_match('/http/', $member['avatar']) ? $member['avatar'] : Yii::$app->params['uploadUrl'] . $member['avatar'];
+            if(!empty($member['avatar'])) {
+                $member['avatar'] = preg_match('/http/', $member['avatar']) ? $member['avatar'] : Yii::$app->params['uploadUrl'] . $member['avatar'];
+            } else {
+                $member['avatar'] = Yii::$app->params['uploadUrl'] . '/images/logo.jpg';
+            }
             return [
                 'status' => 200,
                 'message' => "登录成功",

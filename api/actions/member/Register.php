@@ -37,7 +37,12 @@ class Register extends BaseAction
             //保存数据
             $member = MemberService::saveMember($post);
             if(!empty($member)){
-                $member['avatar'] = preg_match('/http/', $member['avatar']) ? $member['avatar'] : Yii::$app->params['uploadUrl'] . $member['avatar'];
+                if(!empty($member['avatar'])) {
+                    $member['avatar'] = preg_match('/http/', $member['avatar']) ? $member['avatar'] : Yii::$app->params['uploadUrl'] . $member['avatar'];
+
+                }else {
+                    $member['avatar'] = Yii::$app->params['uploadUrl'] . '/images/logo.jpg';
+                }
             }
             return [
                 'status'  => 200,
