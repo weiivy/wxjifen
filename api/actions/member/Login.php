@@ -17,7 +17,7 @@ class Login extends BaseAction
         try{
             //获取用户信息
             $member = Member::find()
-                ->select("id, mobile,openid,nickname,avatar,status,grade,pid,money")
+                ->select("id, mobile,openid,nickname,avatar,status,grade,pid,money,password_salt, password_hash")
                 ->where('mobile=:mobile',[':mobile' => $mobile])->asArray()->one();
             if(empty($member)) {
                 throw  new \Exception("电话为{$mobile}的用户不存在", 0);
@@ -29,6 +29,7 @@ class Login extends BaseAction
                 throw  new \Exception('登录密码错误', 0);
             }
 
+            unset($member['password_salt'], $member['password_hash']);
             $member['avatar'] = preg_match('/http/', $member['avatar']) ? $member['avatar'] : Yii::$app->params['uploadUrl'] . $member['avatar'];
             return [
                 'status' => 200,
