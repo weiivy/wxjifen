@@ -28,7 +28,7 @@ class Login extends BaseAction
                 throw  new \Exception('登录密码错误', 0);
             }
 
-            $member['avatar'] = Yii::$app->params['uploadUrl'] . $member['avatar'];
+            $member['avatar'] = preg_match('/http/', $member['avatar']) ? $member['avatar'] : Yii::$app->params['uploadUrl'] . $member['avatar'];
             return [
                 'status' => 200,
                 'message' => "登录成功",

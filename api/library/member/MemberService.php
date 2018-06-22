@@ -85,7 +85,7 @@ class MemberService extends Component
             throw new \Exception("保存失败");
         }
         $id = Yii::$app->db->getLastInsertID();
-        return Member::find()->where(['id' => $id])->asArray()->one();
+        return Member::find()->select("id, mobile,openid,nickname,avatar,status,grade,pid,money")->where(['id' => $id])->asArray()->one();
     }
 
     /**
