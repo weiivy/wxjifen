@@ -1,6 +1,7 @@
 <?php
 namespace api\library;
 use common\components\Image;
+use yii\helpers\FileHelper;
 
 
 /**
@@ -197,7 +198,9 @@ class UploadedFile
 
             //文件名
             $basename = uniqid() . '.' . strtolower($originalExtension);
-            $file->saveAs($this->rootPath . $this->basePath . $this->subPath . $basename);
+            $basePath = $this->rootPath . $this->basePath . $this->subPath;
+            if(!file_exists($basePath)) FileHelper::createDirectory($basePath, '0775', true);
+            $file->saveAs($basePath . $basename);
 
             $arr = array(
                 'name' => $file->name,   // 上传前客户端的文件名 test.jpg
@@ -211,7 +214,7 @@ class UploadedFile
             );
 
             //生成缩略
-            $fullName = $this->rootPath . $this->basePath . $this->subPath . $basename;
+            $fullName = $basePath . $basename;
             foreach ($this->thumb as $key => $size) {
 
                 //缩略图子目录
