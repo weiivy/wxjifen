@@ -19,7 +19,7 @@ class SendSms extends BaseAction
         if(empty($mobile)) return ['status' => 0, 'message' => '请输入手机号'];
 
         try{
-            $verifyCode = Yii::$app->cache->get('verifyCode');
+            $verifyCode = Yii::$app->cache->get($mobile.'verifyCode');
             if(!empty($verifyCode)) throw new \Exception('60秒内只能发送一次', 0);
             $ucPass = new Ucpaas(['accountsid' => Yii::$app->params['wx']['smsapi']['accountSid'], 'token' => Yii::$app->params['wx']['smsapi']['token']]);
 
@@ -28,6 +28,7 @@ class SendSms extends BaseAction
 
             if(!$result) return ['status' => 0, 'message' => '非国内电话不发送短信'];
             $result = json_decode($result, true);
+            Yii::$app->cache->set($mobile.'verifyCode', $code, 60);
             if($result['msg'] === 'OK') {
                 Yii::$app->cache->set($mobile.'verifyCode', $code, 60);
                 return ['status' => 200, 'message' => "验证码发送成功"];
