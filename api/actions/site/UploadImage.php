@@ -38,7 +38,7 @@ class UploadImage extends BaseAction
         }catch (\Exception $e){
             $result = array(
                 'status' => $e->getCode(),
-                'files' => '',
+                'files' => [],
                 'message' => $e->getMessage()
             );
 

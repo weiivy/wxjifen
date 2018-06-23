@@ -29,7 +29,7 @@ class SendSms extends BaseAction
             if(!$result) return ['status' => 0, 'message' => '非国内电话不发送短信'];
             $result = json_decode($result, true);
             if($result['msg'] === 'OK') {
-                Yii::$app->cache->set('verifyCode', $code, 60);
+                Yii::$app->cache->set($mobile.'verifyCode', $code, 60);
                 return ['status' => 200, 'message' => "验证码发送成功"];
             }
             throw new \Exception($result['msg'], 0);
