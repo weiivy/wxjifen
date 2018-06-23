@@ -20,10 +20,16 @@ class GetMember extends BaseAction
     {
         $memberId = $this->memberId;
         //用户信息
-        $member = Member::find()->where(['id' => $memberId, 'status' => Member::status_10])->asArray()->one();
+        $member = Member::find()
+            ->select("id, mobile,openid,nickname,avatar,status,grade,pid,money")
+            ->where(['id' => $memberId, 'status' => Member::status_10])->asArray()->one();
         if(empty($member)) return ['status' => 200, 'message' => 'openid错误'];
         $member['grade'] = Member::gradeAlisa($member['grade']);
-        $member['avatar'] = Yii::$app->params['uploadUrl'] . $member['avatar'];
+        if(!empty($member['avatar'])) {
+            $member['avatar'] = preg_match('/http/', $member['avatar']) ? $member['avatar'] : Yii::$app->params['uploadUrl'] . $member['avatar'];
+        } else {
+            $member['avatar'] = Yii::$app->params['staticUrl'] . '/logo.jpg';
+        }
         $data = [
             'member' => $member
         ];
