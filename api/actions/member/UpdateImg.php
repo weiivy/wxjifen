@@ -23,10 +23,13 @@ class UpdateImg extends BaseAction
             $files = $up->getFiles();
             $member = Member::findOne(['id' => $this->memberId]);
             $memberOld = clone $member;
-            $member->avatar = $files[0]['thumbnailUrl'];
+            $member->avatar = $files[0]['thumbnailUrl'][1];
             $member->save();
 
-            if($member->errors) throw new \Exception($member->getFirstError(), 0);
+            if($member->errors) {
+                \Yii::error(json_encode($member->errors));
+                throw new \Exception("修改失败", 0);
+            }
             static::deletePicture($memberOld);
             return array(
                 'status' => 200,

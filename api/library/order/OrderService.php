@@ -56,6 +56,7 @@ class OrderService extends Component
     public static function saveOrder($post)
     {
         $member = Member::findOne(['id' => $post['member_id']]);
+
         if(empty($member)) {
             \Yii::error("memberId:" . $post['member_id'] . "用户不存在");
             throw new \Exception("报单失败", 0);
@@ -94,8 +95,7 @@ class OrderService extends Component
         //生成订单号
         $now = time();
         $sql = "SELECT COUNT(*) as total FROM ". Order::tableName() ." WHERE created_at = $now FOR UPDATE"; //当前时间(秒)订单数量
-        $command = \Yii::$app->db->createCommand($sql);
-        $count     = $command->queryAll($sql)['total'];
+        $count = \Yii::$app->db->createCommand($sql)->queryOne()['total'];
         if ($count == 999) {
             \Yii::error('创建订单失败, 生成订单号失败');
             throw new \Exception("报单失败", 0);
@@ -116,16 +116,17 @@ class OrderService extends Component
     {
         $tran = \Yii::$app->db->beginTransaction();
         foreach ($files as $value){
+            $image = str_replace("/uploads/tmp/product", '', $value);
             $model = new OrderPhoto();
             $model->order_id = $orderId;
-            $imagePath = '/uploads/product/' . $value;
+            $imagePath = '/uploads/product' . $image;
             $model->image = \Yii::$app->params['uploadUrl'] . $imagePath;
             $model->save();
             if($model->errors) {
                 $tran->rollBack();
                 throw new \Exception("报单失败", 0);
             }
-            static::savePicture($value);
+            static::savePicture($image);
         }
         $tran->commit();
 
@@ -137,13 +138,13 @@ class OrderService extends Component
     protected static function savePicture( $image)
     {
         // 上传临时目录
-        $baseTemp = dirname(\Yii::$app->getBasePath()) . '/tmp/product';
+        $baseTemp = \Yii::$app->getBasePath() . '/uploads/tmp/product';
 
         // 移动到目标目录
-        $baseTarget = dirname(\Yii::$app->getBasePath()) . '/uploads/product';
+        $baseTarget = \Yii::$app->getBasePath() . '/uploads/product';
 
         // 主图
-        @mkdir(dirname($baseTarget . $image), 0777, true);
+        Help::recursiveMkdir(dirname($baseTarget . $image));
         rename($baseTemp . $image, $baseTarget . $image);
 
     }

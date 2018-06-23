@@ -190,7 +190,7 @@ class UploadedFile
             //文件名
             $basename = uniqid() . '.' . strtolower($originalExtension);
             $basePath = $this->rootPath . $this->basePath . $this->subPath;
-            Help::recursiveMkdir($basePath, 0775);
+            Help::recursiveMkdir($basePath);
             $file->saveAs($basePath . $basename);
 
             $arr = array(

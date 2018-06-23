@@ -37,7 +37,7 @@ class Help extends \yii\base\Component
     public static function recursiveMkdir($path){
         if (!file_exists($path)) {
             self::RecursiveMkdir(dirname($path));
-            mkdir($path, 0775, true);
+            mkdir($path, 0777, true);
         }
     }
 
