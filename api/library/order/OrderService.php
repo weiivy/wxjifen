@@ -121,6 +121,7 @@ class OrderService extends Component
             $model->order_id = $orderId;
             $imagePath = '/uploads/product' . $image;
             $model->image = \Yii::$app->params['uploadUrl'] . $imagePath;
+            $model->created_at = $model->updated_at = time();
             $model->save();
             if($model->errors) {
                 $tran->rollBack();

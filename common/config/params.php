@@ -6,4 +6,5 @@ return [
     'wx' => require ('wx.php'),
     'uploadUrl' => 'http://img1.t5iz.com',
     'staticUrl' => 'http://image.t5iz.com',
+    'h5Url'  => 'http://h5.t5iz.com'
 ];

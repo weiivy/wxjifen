@@ -19,8 +19,9 @@ return [
     'POST pay/notify'                                            => 'notify/notify',
     'POST upgrade'                                               => 'member/upgrade',
     'POST get-money'                                             => 'member/get-money',
-    'POST pay-back'                                             => 'site/pay-back',
+    'POST pay-back'                                              => 'site/pay-back',
     'GET  bank-info'                                             => 'site/bank-info',
     'POST  upload-avatar'                                        => 'member/upload-avatar',
-    'POST  upload-product'                                        => 'site/upload-product',
+    'POST  upload-product'                                       => 'site/upload-product',
+    'GET  sign'                                                  => 'wx/get-sign',
 ];

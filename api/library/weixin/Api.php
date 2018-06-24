@@ -628,7 +628,7 @@ class Api
     {
         $jsapiTicket = $this->getJsApiTicket();
 
-        $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $url = Yii::$app->params['h5Url'];
         $timestamp = time();
         $nonceStr = $this->createNonceStr();
 
