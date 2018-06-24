@@ -400,11 +400,12 @@ class Api
     public function getOpenAuthUserInfo($openidOnly = false, $middleUrl = null)
     {
         $flashKey = 'oAuthAuthState';
+        $session = Yii::$app->session;
 
         //从微信oAuth页面跳转回来
-        if (Yii::$app->getSession($flashKey)) {
+        if ($session->get($flashKey)) {
 
-            $state = Yii::$app->getSession($flashKey);
+            $state = $session->get($flashKey);
             if (!(isset($_GET['code']) && isset($_GET['state']) && $_GET['state'] === $state)) {
                 Yii::error('网页授权获取用户基本信息错误，请检查appid等相关信息');
                 return null;
@@ -430,7 +431,7 @@ class Api
 
         //跳转到微信oAuth授权页面
         $state = uniqid();
-        Yii::$app->session[$flashKey] = $state;
+        $session->set($flashKey, $state);
 //        ::setFlash($flashKey, $state);
 
         //当前url
