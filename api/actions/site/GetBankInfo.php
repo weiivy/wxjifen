@@ -33,7 +33,7 @@ class GetBankInfo extends BaseAction
     private static function getBank()
     {
         $banks = Bank::find()->alias('b')
-            ->select("b.id, b.bank, b.bank_name")
+            ->select("b.id, b.bank, b.bank_name, b.note")
             ->joinWith('bankConfig bc')
             ->where(['bc.status' => BankConfig::STATUS_YES,'b.status' => Bank::STATUS_YES])
             ->orderBy('b.id asc, bc.type asc')
@@ -49,7 +49,8 @@ class GetBankInfo extends BaseAction
                 'note' => ''
             ];
             foreach ($bank['bankConfig'] as $bankConfig){
-                $data[$bank['id']]['bankConfig'][$bankConfig['type']] = [
+                $data[$bank['id']]['list'][] = [
+                    'type'  => $bankConfig['type'],
                     'money' => $bankConfig['money'],
                     'score' => $bankConfig['score'],
                 ];
