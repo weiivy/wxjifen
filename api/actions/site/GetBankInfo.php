@@ -42,19 +42,21 @@ class GetBankInfo extends BaseAction
         $data = [];
         //处理数组
         foreach ($banks as $bank){
-            $data[$bank['id']] = [
-                'id'   => $bank['id'],
-                'bank' => $bank['bank'],
-                'bankName' => $bank['bank_name'],
-                'note' => $bank['note']
-            ];
             foreach ($bank['bankConfig'] as $bankConfig){
-                $data[$bank['id']]['list'][] = [
+                $temp[] = [
                     'type'  => $bankConfig['type'],
                     'money' => $bankConfig['money'],
                     'score' => $bankConfig['score'],
                 ];
             }
+            $data[] = [
+                'id'   => $bank['id'],
+                'bank' => $bank['bank'],
+                'bankName' => $bank['bank_name'],
+                'note' => $bank['note'],
+                'list' => $temp
+            ];
+
 
         }
 
