@@ -288,12 +288,12 @@ class Api
     public function getAccessToken($useCache = true)
     {
         if ($this->accessToken !== null) {
+
             return $this->accessToken;
         }
 
         //通过缓存的时间，判断是否过期，已过期，则从服务器获取
         $cacheKey = $this->appId . 'accessToken';
-
         if (!$useCache) {
             Yii::$app->cache->forget($cacheKey);
         } else {
@@ -687,7 +687,7 @@ class Api
 
             //access_token无效，尝试跳过缓存从新获取access_token
            Yii::warning('access_token cache error');
-            $data = json_decode($this->curlGet(sprintf($url, $type, $this->getAccessToken(false))), true);
+           $data = json_decode($this->curlGet(sprintf($url, $type, $this->getAccessToken(false))), true);
         }
 
         if (is_array($data) && array_key_exists('ticket', $data)) {
