@@ -46,7 +46,7 @@ class GetBankInfo extends BaseAction
                 'id'   => $bank['id'],
                 'bank' => $bank['bank'],
                 'bankName' => $bank['bank_name'],
-                'note' => ''
+                'note' => $bank['note']
             ];
             foreach ($bank['bankConfig'] as $bankConfig){
                 $data[$bank['id']]['list'][] = [
