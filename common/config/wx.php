@@ -11,7 +11,7 @@ return [
         'wx_create_menu_url' => 'https://api.weixin.qq.com/cgi-bin/menu/create',
         'wx_llt_authorize_url' => 'https://open.weixin.qq.com/connect/oauth2/authorize',
 //        'wx_url' => 'http://app.lulutrip.com',	//http://app.lulutrip.co
-        'wx_id' => 'gh_d4164a338dae',	//gh_ab854f2e4d19
+        'wx_id' => 'gh_fda7d13ea2a6',	//gh_ab854f2e4d19
     ],
     'smsapi' => [
         'accountSid'    => '6b9b9217c9cf254c39d906d919c36167',
