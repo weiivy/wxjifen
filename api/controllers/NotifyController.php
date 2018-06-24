@@ -5,6 +5,7 @@ namespace api\controllers;
 use api\library\capitalDetails\CapitalDetailsService;
 use api\library\wxpay\WxpayService;
 use api\models\CapitalDetails;
+use api\models\Member;
 use api\models\WxpayResult;
 use yii\rest\Controller;
 
@@ -82,6 +83,24 @@ class NotifyController extends Controller
             \Yii::error("修改" . $outTradeNo . "状态失败");
             \Yii::$app->db->transaction->rollBack();
             return;
+        }
+
+        //修改用户grade
+        $member = Member::findOne(['id' => $capitalDetails->member_id]);
+        if($totalFee == 199) {
+            $grade = Member::GRADE_20;
+        } elseif ($totalFee == 998){
+            $grade = Member::GRADE_20;
+        }
+        if($grade > $member->grade) {
+            $member->grade = $grade;
+        }
+        $member->updated_at = time();
+        $member->save();
+        if($member->errors) {
+            \Yii::error(json_encode($member->errors));
+            \Yii::$app->db->transaction->rollBack();
+            return false;
         }
 
         //升级返佣

@@ -11,9 +11,9 @@ namespace api\models;
 
 class Member extends \common\models\Member
 {
-    const GRADE_1 = 1; //会员
-    const GRADE_2 = 2; //代理
-    const GRADE_3 = 3; //股东
+    const GRADE_10 = 10; //会员
+    const GRADE_20 = 20; //代理
+    const GRADE_30 = 30; //股东
 
     const status_10 = 10; //正常
     const status_20 = 20; //删除
@@ -28,9 +28,9 @@ class Member extends \common\models\Member
     public static function gradeAlisa($grade)
     {
         $array = [
-            static::GRADE_1 => '会员',
-            static::GRADE_2 => '代理',
-            static::GRADE_3 => '股东'
+            static::GRADE_10 => '会员',
+            static::GRADE_20 => '代理',
+            static::GRADE_30 => '股东'
         ];
         return isset($array[$grade]) ? $array[$grade] : null;
     }
