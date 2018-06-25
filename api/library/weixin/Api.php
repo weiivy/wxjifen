@@ -432,7 +432,6 @@ class Api
         //跳转到微信oAuth授权页面
         $state = uniqid();
         $session->set($flashKey, $state);
-//        ::setFlash($flashKey, $state);
 
         //当前url
         $redirectUri = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -440,10 +439,10 @@ class Api
         //通过一个中间url跳转
         if ($middleUrl !== null) {
             //http://wechat.chehutong.cn/api/wechat/authorizeRedirect
-            /*
+
             //middleUrl指向authorize-redirect.php，代码代码如下
-            $code = urlencode(isset($_GET['code']) ? $_GET['code'] : '');
-            $state = urlencode(isset($_GET['state']) ? $_GET['state'] : '');
+            //$code = urlencode(isset($_GET['code']) ? $_GET['code'] : '');
+            //$state = urlencode(isset($_GET['state']) ? $_GET['state'] : '');
 
             $url = isset($_GET['url']) ? $_GET['url'] : '';
 
@@ -456,22 +455,17 @@ class Api
                 } else {
                     $url .= '&';
                 }
-
-                $url .= "code=$code&state=$state";
-
                 header('Location: ' . $url);
                 exit;
 
             } else {
                 echo 'url is empty!';
             }
-            */
-            $redirectUri = $middleUrl . ((strpos($middleUrl, '?') === false) ? '?' : '&') . 'url=' . urlencode($redirectUri);
+            $redirectUri = $redirectUri . 'url=' . urlencode($middleUrl);
         }
 
         //跳转到微信授权url
         $url = $this->getOauthAuthorizeUrl($redirectUri, $state, $openidOnly === true ? 'snsapi_base' : 'snsapi_userinfo');
-
         header('Location: ' . $url);
         exit;
     }

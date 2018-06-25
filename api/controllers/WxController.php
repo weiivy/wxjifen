@@ -30,6 +30,6 @@ class WxController extends Controller
     public function actionUserInfo()
     {
         $api = new Api(Yii::$app->params['wx']['developer']['appId'], Yii::$app->params['wx']['developer']['appSecret']);
-        $api->getOpenAuthUserInfo(false, null);
+        $api->getOpenAuthUserInfo(false, Yii::$app->params['h5Url'] . '/#/index');
     }
 }

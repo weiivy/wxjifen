@@ -29,8 +29,8 @@ return [
         'signtype' => 'SHA1',
         'partnerid' => '1235468601', // deprecated: wxpay api upgrade
         'partnerkey' => '3541dfd760c82f709970b18686d7ccb5', // 通加密串 deprecated: wxpay api upgrade
-        'mch_id' => '1501565661',
-        'key' => 'mVuhSwD8Ocd96xYHfC7Bc3nerWXoVRzt'
+        'mch_id' => '1507282181',
+        'key' => 'ttuhSwD8Ocd96x77fC7Bc3nerWXoVRzt'
     ],
 
 ];
