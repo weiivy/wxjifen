@@ -623,7 +623,7 @@ class Api
     {
         $jsapiTicket = $this->getJsApiTicket();
 
-        $url = Yii::$app->params['h5Url'];
+        $url = Yii::$app->params['h5Url'] . '/';
         $timestamp = time();
         $nonceStr = $this->createNonceStr();
 

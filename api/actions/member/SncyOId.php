@@ -8,6 +8,11 @@ use api\models\Contact;
 use api\models\Member;
 use Yii;
 
+/**
+ * 同步openid
+ * @copyright (c) 2018
+ * @author  Weiwei Zhang<zhangweiwei@2345.com>
+ */
 class SncyOId extends BaseAction
 {
     public function run()
