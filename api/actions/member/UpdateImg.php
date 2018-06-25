@@ -49,6 +49,7 @@ class UpdateImg extends BaseAction
      */
     protected static function deletePicture(Member $member)
     {
+        if(preg_match('/[http|https]/', $member->avatar)) return;
         $base = dirname(\Yii::$app->getBasePath()) ;
         if (!empty($member->avatar)) {
 

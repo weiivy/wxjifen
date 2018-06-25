@@ -128,6 +128,8 @@ class OrderService extends Component
                 throw new \Exception("报单失败", 0);
             }
             static::savePicture($image);
+            //删除tmp
+            static::deletePicture($image);
         }
         $tran->commit();
 
@@ -148,5 +150,14 @@ class OrderService extends Component
         Help::recursiveMkdir(dirname($baseTarget . $image));
         rename($baseTemp . $image, $baseTarget . $image);
 
+    }
+
+    /**
+     * @param $image
+     */
+    protected static function deletePicture($image)
+    {
+        $baseTemp = \Yii::$app->getBasePath() . '/uploads/tmp/product';
+        @unlink($baseTemp . $image);
     }
 }

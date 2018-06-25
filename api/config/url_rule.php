@@ -24,5 +24,6 @@ return [
     'POST  upload-avatar'                                        => 'member/upload-avatar',
     'POST  upload-product'                                       => 'site/upload-product',
     'GET  sign'                                                  => 'wx/get-sign',
-    'GET  user-info'                                                  => 'wx/user-info',
+    'POST  user-info'                                             => 'wx/user-info',
+    'POST  get-auth'                                              => 'wx/get-auth',
 ];

@@ -3,7 +3,7 @@ return [
     'developer' => [
         'appId' => 'wxd487a0dc8db164d3',
         'appSecret' => '7ee8df8b07ee2fe28d6098f7c4b3b311',
-        'token' => 'jifensuibiandui',
+        'token' => 'jifensuibiandui118',
         'DebugAppId' => 'wx347d53defefdfa69',   // 【微信测试号】AppId
         'Debugappsecret' => '5a3ccea71a88bc2c4d14d0224877b8a2', // 【微信测试号】AppSecret
         'DebugOpenId' => 'oTUF7szKs33JSeT944HrNxCTQb98',    // 【微信测试号】open_id for Laurence
@@ -12,7 +12,7 @@ return [
         'wx_llt_authorize_url' => 'https://open.weixin.qq.com/connect/oauth2/authorize',
 //        'wx_url' => 'http://app.lulutrip.com',	//http://app.lulutrip.co
         'wx_id' => 'gh_fda7d13ea2a6',	//gh_ab854f2e4d19
-        'encodingAESKey' => 'ENmjGyfM31XusL0JDxmsbwo6oGfxkcUqxADYtWhFYUL'
+        'encodingAESKey' => 'N5tqIbb8oErw3giNowBgd9XKlvAv15OqVcQG9jag5mX'
     ],
     'smsapi' => [
         'accountSid'    => '6b9b9217c9cf254c39d906d919c36167',

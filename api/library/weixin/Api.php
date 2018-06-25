@@ -298,9 +298,9 @@ class Api
             Yii::$app->cache->forget($cacheKey);
         } else {
             $accessToken = Yii::$app->cache->get($cacheKey);
-            if ($accessToken !== false) {
-                return $accessToken;
-            }
+//            if ($accessToken !== false) {
+//                return $accessToken;
+//            }
         }
 
         $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s";
@@ -670,9 +670,9 @@ class Api
 
         $ticket = Yii::$app->cache->get($cacheKey);
 
-        if ($ticket !== false) {
-            return $ticket;
-        }
+//        if ($ticket !== false) {
+//            return $ticket;
+//        }
 
         $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=%s&access_token=%s";
         $data = json_decode($this->curlGet(sprintf($url, $type, $this->getAccessToken())), true);

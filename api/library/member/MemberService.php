@@ -30,7 +30,7 @@ class MemberService extends Component
         $contact = new Contact();
         $contact->openid = $post['openId'];
         $contact->nickname = $post['nickName'];
-        $contact->head_image = $post['avatarUrl'];
+        $contact->head_image = $post['headimgurl'];
         $contact->city = $post['city'];
         $contact->province = $post['province'];
         $contact->country = $post['country'];
