@@ -26,4 +26,5 @@ return [
     'GET  sign'                                                  => 'wx/get-sign',
     'POST  user-info'                                             => 'wx/user-info',
     'POST  get-auth'                                              => 'wx/get-auth',
+    'POST  update-oid'                                              => 'member/sncy-oid',
 ];
