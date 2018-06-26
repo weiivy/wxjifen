@@ -6,6 +6,7 @@ namespace api\controllers;
 use api\library\member\MemberService;
 use api\library\weixin\Api;
 use api\models\Contact;
+use api\models\Member;
 use yii\rest\Controller;
 use Yii;
 
@@ -94,7 +95,18 @@ class WxController extends Controller
                 'country' => $userInfo['country'],
                 'gender' => $userInfo['sex'],
             ];
-            if(MemberService::saveContact($post)) {
+            $member = Member::findOne(['openid' => $userInfo['openid']]);
+            if($member) {
+                $contact = Contact::find()->select("openid,nickname,sex,city,province,country,hhead_image as eadimgurl")
+                    ->where(['openid' => $member->openid])
+                    ->asArray()->one();
+                return [
+                    'status' => 200,
+                    'message'=> 'success',
+                    'data'   => $contact
+                ];
+            }
+            if(!$member && MemberService::saveContact($post)) {
                 Yii::warning(json_encode($userInfo));
                 return [
                     'status' => 200,
