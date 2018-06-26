@@ -73,8 +73,7 @@ class WxController extends Controller
 
         //获取AccessToken
         $arr = $api->getOauthAccessToken($code);
-        var_dump($arr, $arr === null);die;
-        if($arr === null) {
+        if(empty($arr)) {
             return [
                 'status' => 0,
                 'message' => '获取AccessToken失败'
@@ -95,7 +94,7 @@ class WxController extends Controller
                 'country' => $userInfo['country'],
                 'gender' => $userInfo['sex'],
             ];
-            if(MemberService::saveContact($userInfo)) {
+            if(MemberService::saveContact($post)) {
                 Yii::warning(json_encode($userInfo));
                 return [
                     'status' => 200,
