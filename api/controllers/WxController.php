@@ -59,8 +59,9 @@ class WxController extends Controller
 
         //从微信oAuth页面跳转回来
 
-
-        if (!(isset($_POST['code']) || !isset($_POST['state']) )) {
+        $code = Yii::$app->request->post('code');
+        $state = Yii::$app->request->post('state');
+        if (!$code || !$state ) {
             Yii::error('网页授权获取用户基本信息错误，请检查appid等相关信息');
             return [
                 'status' => 0,
@@ -68,11 +69,16 @@ class WxController extends Controller
             ];
         }
 
-        $code = $_POST['code']; //用来换到accessToken的code
         $api = new Api(Yii::$app->params['wx']['developer']['appId'], Yii::$app->params['wx']['developer']['appSecret']);
 
         //获取AccessToken
         $arr = $api->getOauthAccessToken($code);
+        if($arr === null) {
+            return [
+                'status' => 0,
+                'message' => '获取AccessToken失败'
+            ];
+        }
 
 
         //获取用户信息
