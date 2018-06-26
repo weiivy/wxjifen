@@ -510,6 +510,8 @@ class Api
 
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$appId}&secret={$secret}&code={$code}&grant_type={$grant_type}";
         $output = $this->curlGet($url);
+        $output = '{"access_token":"11_juhSmNBL2QJWjPq6zIVIhJBUqSE3aYMBLbY9_DQotYtQQDVJa2ZbVjepo1EF99lXdy7mtHdmPP5_GArMwzFE3w","expires_in":7200,"refresh_token":"11_XqDAwf7imzExHgsATro1FcK4xwKYbSlhf9R8PSlCv9WeOkcjjuoanNRSWAnuSUccvUHs3cErfz6l72gsuiXd6g","openid":"oCGeK1bpywpdiqyj1IWNGlPnqEE0","scope":"snsapi_userinfo"}';
+
 
         /*{
            "access_token":"ACCESS_TOKEN",
@@ -562,7 +564,7 @@ class Api
         $output = $this->curlGet($url);
 
         /*{
-           "openid":" OPENID",
+           "openid":" omd6J5bHKLRYkL1MEcp6WE7BauM",
            " nickname": NICKNAME,
            "sex":"1",
            "province":"PROVINCE"

@@ -81,7 +81,6 @@ class WxController extends Controller
             ];
         }
 
-
         //获取用户信息
         $userInfo = $api->getOauthUserInfo($arr['openid'], $arr['access_token']);
 
@@ -97,7 +96,7 @@ class WxController extends Controller
             ];
             $member = Member::findOne(['openid' => $userInfo['openid']]);
             if($member) {
-                $contact = Contact::find()->select("openid,nickname,sex,city,province,country,hhead_image as eadimgurl")
+                $contact = Contact::find()->select("openid,nickname,sex,city,province,country,head_image as headimgurl")
                     ->where(['openid' => $member->openid])
                     ->asArray()->one();
                 return [
