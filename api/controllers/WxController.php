@@ -73,6 +73,7 @@ class WxController extends Controller
 
         //获取AccessToken
         $arr = $api->getOauthAccessToken($code);
+        var_dump($arr);die;
         if($arr === null) {
             return [
                 'status' => 0,
