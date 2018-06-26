@@ -73,7 +73,7 @@ class WxController extends Controller
 
         //获取AccessToken
         $arr = $api->getOauthAccessToken($code);
-        var_dump($arr);die;
+        var_dump($arr, $arr === null);die;
         if($arr === null) {
             return [
                 'status' => 0,
@@ -84,13 +84,26 @@ class WxController extends Controller
 
         //获取用户信息
         $userInfo = $api->getOauthUserInfo($arr['openid'], $arr['access_token']);
-        if($userInfo && MemberService::saveContact($userInfo)) {
-            Yii::warning(json_encode($userInfo));
-            return [
-                'status' => 200,
-                'message'=> 'success',
-                'data'   => $userInfo
+
+        if($userInfo ) {
+            $post = [
+                'openId' => $userInfo['openid'],
+                'nickName' => $userInfo['nickname'],
+                'avatarUrl' => $userInfo['headimgurl'],
+                'city' => $userInfo['city'],
+                'province' => $userInfo['province'],
+                'country' => $userInfo['country'],
+                'gender' => $userInfo['sex'],
             ];
+            if(MemberService::saveContact($userInfo)) {
+                Yii::warning(json_encode($userInfo));
+                return [
+                    'status' => 200,
+                    'message'=> 'success',
+                    'data'   => $userInfo
+                ];
+            }
+
         }
 
         return [

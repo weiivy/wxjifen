@@ -28,9 +28,9 @@ class MemberService extends Component
     public static function saveContact($post)
     {
         $contact = new Contact();
-        $contact->openid = $post['openid'];
+        $contact->openid = $post['openId'];
         $contact->nickname = $post['nickName'];
-        $contact->head_image = $post['headimgurl'];
+        $contact->head_image = $post['avatarUrl'];
         $contact->city = $post['city'];
         $contact->province = $post['province'];
         $contact->country = $post['country'];
