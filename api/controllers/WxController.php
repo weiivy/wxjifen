@@ -55,6 +55,7 @@ class WxController extends Controller
     {
         $flashKey = 'oAuthAuthState';
         $session = Yii::$app->session;
+        var_dump($session->get($flashKey));die;
 
         //从微信oAuth页面跳转回来
         if ($session->get($flashKey)) {
@@ -73,6 +74,7 @@ class WxController extends Controller
 
             //获取AccessToken
             $arr = $api->getOauthAccessToken($code);
+            var_dump($arr);die;
 
 
             //获取用户信息
