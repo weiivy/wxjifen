@@ -510,6 +510,7 @@ class Api
 
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$appId}&secret={$secret}&code={$code}&grant_type={$grant_type}";
         $output = $this->curlGet($url);
+        var_dump($output);die;
 
 
         /*{
