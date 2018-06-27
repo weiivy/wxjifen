@@ -24,15 +24,17 @@ class BaseAction extends Action
     {
         //获取操作人信息
         $memberId = Yii::$app->request->post('memberId');
-        $member = MemberService::getMemberInfo($memberId);
-
-        if(empty($member)){
-            echo json_encode([
-                'status' => 0,
-                'message' => '用户ID错误'
-            ]);exit;
+        if($memberId) {
+            $member = MemberService::getMemberInfo($memberId);
+            if(empty($member)){
+                echo json_encode([
+                    'status' => 0,
+                    'message' => '用户ID错误'
+                ]);exit;
+            }
+            $this->memberId = $member->id;
         }
-        $this->memberId = $member->id;
+
 
     }
 }
