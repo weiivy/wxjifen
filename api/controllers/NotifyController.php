@@ -90,7 +90,7 @@ class NotifyController extends Controller
         if($totalFee == 199) {
             $grade = Member::GRADE_20;
         } elseif ($totalFee == 998){
-            $grade = Member::GRADE_20;
+            $grade = Member::GRADE_30;
         }
         if($grade > $member->grade) {
             $member->grade = $grade;
@@ -104,7 +104,7 @@ class NotifyController extends Controller
         }
 
         //升级返佣
-        if($capitalDetails->kind == CapitalDetails::KIND_30) {
+        if($capitalDetails->kind == CapitalDetails::KIND_31) {
             if(!CapitalDetailsService::upgradeRebate($capitalDetails->member_id, $totalFee)) {
                 \Yii::error("记录" . $outTradeNo . "升级返佣失败");
                 \Yii::$app->db->transaction->rollBack();
