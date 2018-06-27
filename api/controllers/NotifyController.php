@@ -91,6 +91,8 @@ class NotifyController extends Controller
             $grade = Member::GRADE_20;
         } elseif ($totalFee == 998){
             $grade = Member::GRADE_30;
+        } else {
+            $grade = Member::GRADE_20;
         }
         if($grade > $member->grade) {
             $member->grade = $grade;
