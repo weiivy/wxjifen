@@ -15,12 +15,15 @@ class Upgrade extends BaseAction
     public function run()
     {
         $memberId = $this->memberId;
-//        $fee = Yii::$app->request->post('fee');
-        $fee = 0.01;
-        $kind = Yii::$app->request->post('kind');
-        if(empty($fee)) return ['status' => 0, 'message' => '操作失败'];
-        $member = Member::findOne(['id' => $memberId]);
 
+        //验证金额
+        $type = Yii::$app->request->post('type');
+        $fee = CapitalDetails::payFee($type);
+        $fee = 0.01;
+        if(empty($fee)) return ['status' => 0, 'message' => '操作失败'];
+
+        $kind = CapitalDetails::KIND_31;
+        $member = Member::findOne(['id' => $memberId]);
 
         //生成充值记录
         try{

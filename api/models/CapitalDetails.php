@@ -37,4 +37,18 @@ class CapitalDetails extends \common\models\CapitalDetails
         return isset($array[$kind]) ? $array[$kind] : null;
     }
 
+    /**
+     * 充值金额
+     * @param $type
+     * @return int|mixed
+     */
+    public static function payFee($type)
+    {
+        $arr = [
+            10 => 199,  //合伙人
+            20 => 998   //黄金合伙人
+        ];
+        return isset($arr[$type]) ? $arr[$type] : 0;
+    }
+
 }
