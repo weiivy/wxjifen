@@ -51,4 +51,5 @@ class CapitalDetails extends \common\models\CapitalDetails
         return isset($arr[$type]) ? $arr[$type] : 0;
     }
 
+
 }

@@ -23,7 +23,17 @@ class Upgrade extends BaseAction
         if(empty($fee)) return ['status' => 0, 'message' => '操作失败'];
 
         $kind = CapitalDetails::KIND_31;
+
+        //校验等级
         $member = Member::findOne(['id' => $memberId]);
+        if($fee == 199 ) {
+            $grade = Member::GRADE_20;
+        } elseif ($fee == 988){
+            $grade = Member::GRADE_30;
+        }
+        if($member->grade >= $grade) {
+            return ['status' => 0, 'message' => '您当前等级是：'. Member::gradeAlisa($member->grade)];
+        }
 
         //生成充值记录
         try{
