@@ -57,7 +57,6 @@ class WxController extends Controller
         //从微信oAuth页面跳转回来
         $code = Yii::$app->request->post('code');
         $state = Yii::$app->request->post('state');
-        $memberId = Yii::$app->request->post('memberId');
         if (!$code || !$state ) {
             Yii::error('网页授权获取用户基本信息错误，请检查appid等相关信息');
             return [

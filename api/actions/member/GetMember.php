@@ -24,7 +24,7 @@ class GetMember extends BaseAction
             ->select("id, mobile,openid,nickname,avatar,status,grade,pid,money")
             ->where(['id' => $memberId, 'status' => Member::status_10])->asArray()->one();
         if(empty($member)) return ['status' => 200, 'message' => 'openid错误'];
-        $member['grade'] = Member::gradeAlisa($member['grade']);
+        $member['gradeAlias'] = Member::gradeAlisa($member['grade']);
         if(!empty($member['avatar'])) {
             $member['avatar'] = preg_match('/http/', $member['avatar']) ? $member['avatar'] : Yii::$app->params['uploadUrl'] . $member['avatar'];
         } else {

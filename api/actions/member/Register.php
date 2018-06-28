@@ -43,6 +43,7 @@ class Register extends BaseAction
                 }else {
                     $member['avatar'] = Yii::$app->params['staticUrl'] . '/logo.jpg';
                 }
+                $member['gradeAlias'] = Member::gradeAlisa($member['grade']);
             }
             return [
                 'status'  => 200,

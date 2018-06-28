@@ -35,6 +35,7 @@ class Login extends BaseAction
             } else {
                 $member['avatar'] = Yii::$app->params['staticUrl'] . '/logo.jpg';
             }
+            $member['gradeAlias'] = Member::gradeAlisa($member['grade']);
             return [
                 'status' => 200,
                 'message' => "登录成功",
