@@ -26,12 +26,7 @@ class Upgrade extends BaseAction
 
         //校验等级
         $member = Member::findOne(['id' => $memberId]);
-        if($fee == 199 ) {
-            $grade = Member::GRADE_20;
-        } elseif ($fee == 988){
-            $grade = Member::GRADE_30;
-        }
-        if($member->grade >= $grade) {
+        if(($fee == 199 && $member->grade >= Member::GRADE_20) || ($fee == 998 && $member->grade >= Member::GRADE_30)) {
             return ['status' => 0, 'message' => '您当前等级是：'. Member::gradeAlisa($member->grade)];
         }
 

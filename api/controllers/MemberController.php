@@ -21,6 +21,7 @@ class MemberController extends Controller
             'get-money' => 'api\actions\member\GetMoney',
             'upload-avatar' => 'api\actions\member\UpdateImg',
             'sncy-oid' => 'api\actions\member\SncyOId',
+            'update-name' => 'api\actions\member\UpdateName',
         ];
     }
 }

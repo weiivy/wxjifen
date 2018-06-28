@@ -7,7 +7,7 @@ use api\actions\BaseAction;
 use api\models\Member;
 use Yii;
 
-class updateNickName extends BaseAction
+class UpdateName extends BaseAction
 {
     public function run()
     {
