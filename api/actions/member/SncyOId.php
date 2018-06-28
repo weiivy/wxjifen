@@ -18,6 +18,8 @@ class SncyOId extends BaseAction
     public function run()
     {
         $openId = Yii::$app->request->post('openid');
+        $avatar = Yii::$app->request->post('avatar');
+        $nickname = Yii::$app->request->post('nickname');
         try{
 
             //验证openid
@@ -28,6 +30,8 @@ class SncyOId extends BaseAction
 
             $member = Member::findOne(['id' => $this->memberId]);
             $member->openid = $userInfo->openid;
+            if($avatar) $member->avatar = $avatar;
+            if($nickname) $member->nickname = $nickname;
             $member->updated_at = time();
             $member->save();
             if($member->errors) {

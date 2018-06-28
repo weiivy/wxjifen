@@ -120,8 +120,4 @@ class WxController extends Controller
 
     }
 
-    private static function registerMember($userInfo)
-    {
-
-    }
 }
