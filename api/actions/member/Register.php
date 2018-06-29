@@ -22,7 +22,7 @@ class Register extends BaseAction
 
             //验证验证码
             $code = Yii::$app->cache->get($post['mobile'].'verifyCode');
-            if($code != $post['code']) {
+            if($code != $post['verifyCode']) {
                 throw new \Exception("验证码已失效", 0);
             }
             //验证密码
