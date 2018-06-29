@@ -26,6 +26,7 @@ class SendSms extends BaseAction
             $code = rand(100000,999999);
             $result = $ucPass->SendSms(Yii::$app->params['wx']['smsapi']['appid'], Yii::$app->params['wx']['smsapi']['templateid'], $code, $mobile, '');
 
+            if($result == '没有返回数据') return ['status' => 0, 'message' => '没有返回数据'];
             if(!$result) return ['status' => 0, 'message' => '非国内电话不发送短信'];
             $result = json_decode($result, true);
             Yii::$app->cache->set($mobile.'verifyCode', $code, 60);
