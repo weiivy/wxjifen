@@ -15,10 +15,10 @@ return [
         'encodingAESKey' => 'N5tqIbb8oErw3giNowBgd9XKlvAv15OqVcQG9jag5mX'
     ],
     'smsapi' => [
-        'accountSid'    => '6b9b9217c9cf254c39d906d919c36167',
-        'token'         => 'e9f1a56ceb56e6e0a3c3014037642356',
-        'appid'         => '7e758527a6024d22b9ba53642c185f8e',
-        'templateid'    => '304220'
+        'accountSid'    => 'd8d3df5897a3de5df9af68b82c4bedfd',
+        'token'         => '98556c519e9ff3591c1f06990f8f123b',
+        'appid'         => '549cf781a3034e57986c7463d046fff5',
+        'templateid'    => '305130'
 
     ],
 
