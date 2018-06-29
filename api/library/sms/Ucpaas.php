@@ -1,6 +1,7 @@
 <?php
 
 namespace api\library\sms;
+use yii\db\Exception;
 
 /**
  * 云之汛
@@ -38,7 +39,7 @@ class Ucpaas
         if (isset($data) && !empty($data)) {
             $result = $data;
         } else {
-            $result = '没有返回数据';
+            throw new Exception('没有返回数据', 0);
         }
         return $result;
     }
