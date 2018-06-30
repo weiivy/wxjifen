@@ -102,14 +102,24 @@ class WxController extends Controller
                 ];
             }
 
-            if(MemberService::saveContact($post)) {
-                Yii::warning(json_encode($userInfo));
+            $contact = Contact::findOne(['openid' => $userInfo['openid']]);
+            if($contact) {
                 return [
                     'status' => 200,
                     'message'=> 'success',
                     'data'   => $userInfo
                 ];
             }
+
+            if(!MemberService::saveContact($post)) {
+                Yii::warning(json_encode($userInfo));
+            }
+
+            return [
+                'status' => 200,
+                'message'=> 'success',
+                'data'   => $userInfo
+            ];
 
         }
 
