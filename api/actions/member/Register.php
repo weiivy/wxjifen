@@ -25,34 +25,16 @@ class Register extends BaseAction
             if($code != $post['verifyCode']) {
                 throw new \Exception("验证码已失效", 0);
             }
-            //验证密码
-            if(!preg_match('/^[a-zA-Z\d_]{6,30}$/i', $post['password'])) {
-                throw new \Exception("密码由数字字母下划线组成", 0);
-            }
 
-            if($post['password'] != $post['repassword']) {
-                throw new \Exception("两次密码不一致", 0);
+            $member = MemberService::memberInfo(['mobile' => $post['mobile']]);
+            if(!$member) {
+                //保存数据
+                $member = MemberService::saveMember($post);
             }
-
-            $member = Member::findOne(['mobile' => $post['mobile']]);
-            if($member) {
-                throw new \Exception($post['mobile'] ."已注册");
-            }
-
-            //保存数据
-            $member = MemberService::saveMember($post);
-            if(!empty($member)){
-                if(!empty($member['avatar'])) {
-                    $member['avatar'] = preg_match('/http/', $member['avatar']) ? $member['avatar'] : Yii::$app->params['uploadUrl'] . $member['avatar'];
-
-                }else {
-                    $member['avatar'] = Yii::$app->params['staticUrl'] . '/logo.jpg';
-                }
-                $member['gradeAlias'] = Member::gradeAlisa($member['grade']);
-            }
+            $member = static::formatMember($member);
             return [
                 'status'  => 200,
-                'message' => "注册成功",
+                'message' => "登录成功",
                 'data'    => $member
             ];
         }catch (\Exception $e){
@@ -62,9 +44,23 @@ class Register extends BaseAction
                 'data'    => []
             ];
         }
+    }
 
+    /**
+     * 格式化用户信息
+     * @param $member
+     * @return mixed
+     */
+    private static function formatMember($member)
+    {
+        if(empty($member)) return $member;
+        if(!empty($member['avatar'])) {
+            $member['avatar'] = preg_match('/http/', $member['avatar']) ? $member['avatar'] : Yii::$app->params['uploadUrl'] . $member['avatar'];
 
-
-
+        }else {
+            $member['avatar'] = Yii::$app->params['staticUrl'] . '/logo.png';
+        }
+        $member['gradeAlias'] = Member::gradeAlisa($member['grade']);
+        return $member;
     }
 }

@@ -28,7 +28,7 @@ class GetMember extends BaseAction
         if(!empty($member['avatar'])) {
             $member['avatar'] = preg_match('/http/', $member['avatar']) ? $member['avatar'] : Yii::$app->params['uploadUrl'] . $member['avatar'];
         } else {
-            $member['avatar'] = Yii::$app->params['staticUrl'] . '/logo.jpg';
+            $member['avatar'] = Yii::$app->params['staticUrl'] . '/logo.png';
         }
         $data = [
             'member' => $member

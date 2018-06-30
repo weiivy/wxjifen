@@ -9,7 +9,6 @@ return [
     'POST sendSms'                                               => 'site/sendSms',
     'POST check-member'                                          => 'site/check-member',
     'POST get-mobile'                                            => 'site/get-mobile',
-    'POST register'                                              => 'member/register',
     'POST get-capital-detail'                                    => 'member/get-capital-detail',
     'POST get-orders'                                            => 'member/get-orders',
     'POST bank-config'                                           => 'site/bank-config',

@@ -74,9 +74,9 @@ class MemberService extends Component
             $member->avatar = $userInfo->head_image;
         }
 
-        static::generatePasswordSalt();
-        $member->password_hash = static::generatePasswordHash($post['password']);
-        $member->password_salt = static::$passwordSalt;
+//        static::generatePasswordSalt();
+//        $member->password_hash = static::generatePasswordHash($post['password']);
+//        $member->password_salt = static::$passwordSalt;
         $member->pid = $pid;
         $time = time();
         $member->created_at = $member->updated_at = $time;
@@ -86,7 +86,17 @@ class MemberService extends Component
             throw new \Exception("保存失败");
         }
         $id = Yii::$app->db->getLastInsertID();
-        return Member::find()->select("id, mobile,openid,nickname,avatar,status,grade,pid,money")->where(['id' => $id])->asArray()->one();
+        return static::memberInfo(['id' => $id]);
+    }
+
+    /**
+     * 用户信息
+     * @param $condition
+     * @return array|null|\yii\db\ActiveRecord
+     */
+    public static function memberInfo($condition)
+    {
+        return Member::find()->select("id, mobile,openid,nickname,avatar,status,grade,pid,money")->where($condition)->asArray()->one();
     }
 
     /**
