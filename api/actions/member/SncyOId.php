@@ -35,6 +35,7 @@ class SncyOId extends BaseAction
             $member->updated_at = time();
             $member->save();
             if($member->errors) {
+                Yii::error("更新同步openid失败");
                 throw new \Exception('更新同步openid失败', 0);
             }
             return [

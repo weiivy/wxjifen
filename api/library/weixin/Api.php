@@ -583,6 +583,7 @@ class Api
         if (array_key_exists('openid', $arr)) {
             return $arr;
         }
+        Yii::error($output);
         return null;
     }
 

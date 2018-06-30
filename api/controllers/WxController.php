@@ -70,6 +70,7 @@ class WxController extends Controller
         //获取AccessToken
         $arr = $api->getOauthAccessToken($code);
         if(empty($arr)) {
+            Yii::error("获取AccessToken失败");
             return [
                 'status' => 0,
                 'message' => '获取AccessToken失败'
