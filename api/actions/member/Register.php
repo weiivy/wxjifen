@@ -21,10 +21,10 @@ class Register extends BaseAction
         try{
 
             //验证验证码
-//            $code = Yii::$app->cache->get($post['mobile'].'verifyCode');
-//            if($code != $post['verifyCode']) {
-//                throw new \Exception("验证码已失效", 0);
-//            }
+            $code = Yii::$app->cache->get($post['mobile'].'verifyCode');
+            if($code != $post['verifyCode']) {
+                throw new \Exception("验证码已失效", 0);
+            }
             //验证密码
             if(!preg_match('/^[a-zA-Z\d_]{6,30}$/i', $post['password'])) {
                 throw new \Exception("密码由数字字母下划线组成", 0);
