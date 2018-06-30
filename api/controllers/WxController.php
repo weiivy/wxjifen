@@ -102,7 +102,7 @@ class WxController extends Controller
                 ];
             }
 
-            if(!$member && MemberService::saveContact($post)) {
+            if(MemberService::saveContact($post)) {
                 Yii::warning(json_encode($userInfo));
                 return [
                     'status' => 200,
