@@ -19,7 +19,7 @@ class SendSms extends BaseAction
         if(empty($mobile)) return ['status' => 0, 'message' => '请输入手机号'];
 
         try{
-//            $verifyCode = Yii::$app->cache->get($mobile.'verifyCode');
+            $verifyCode = Yii::$app->cache->get($mobile.'verifyCode');
             if(!empty($verifyCode)) throw new \Exception('60秒内只能发送一次', 0);
             $ucPass = new Ucpaas(['accountsid' => Yii::$app->params['wx']['smsapi']['accountSid'], 'token' => Yii::$app->params['wx']['smsapi']['token']]);
 
