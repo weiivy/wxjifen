@@ -34,7 +34,7 @@ class GetCapitalDetail extends BaseAction
         $memberId = $this->memberId;
         return [
             'status' => 200,
-            'data'   => CapitalDetailsService::getList($page, $pageSize, $type[$kind], $memberId)
+            'data'   => CapitalDetailsService::getList($page, $pageSize, isset($type[$kind]) ? $type[$kind] : '', $memberId)
         ];
     }
 }
