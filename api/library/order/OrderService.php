@@ -2,6 +2,7 @@
 namespace api\library\order;
 
 use api\library\Help;
+use api\models\BankConfig;
 use api\models\Member;
 use api\models\Order;
 use api\models\OrderPhoto;
@@ -62,6 +63,13 @@ class OrderService extends Component
             throw new \Exception("报单失败", 0);
         }
 
+        //获取银行配置点数
+        $bankConfig = BankConfig::findOne(['bank_id' => $post['bank_id'], 'type' => $member->grade]);
+        if(empty($bankConfig)){
+            throw new \Exception("银行未配置兑换比例", 0);
+        }
+        $money = round((($bankConfig->money / $bankConfig->score) * $post['score']), 2);
+
         //生成订单号
         $outTradeNo = static::generateOutTradeNo();
         $order = new Order();
@@ -69,6 +77,7 @@ class OrderService extends Component
         $order->member_id = $post['member_id'];
         $order->bank_id = $post['bank_id'];
         $order->integral = $post['score'];
+        $order->money = $money;
         if(!empty($post['exchange_code'])) $order->exchange_code = $post['exchange_code'];
         if(isset($post['valid_time']) && $post['valid_time'] != '请选择有效期') $order->valid_time = $post['valid_time'];
         $order->status = Order::STATUS_10;
