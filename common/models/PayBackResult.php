@@ -13,6 +13,7 @@ use Yii;
  * @property string $partner_trade_no
  * @property string $payment_no
  * @property string $payment_time
+ * @property string $payment_money
  * @property integer $created_at
  * @property integer $updated_at
  */
@@ -36,6 +37,7 @@ class PayBackResult extends \yii\db\ActiveRecord
             [['mch_id', 'mch_appid', 'partner_trade_no'], 'string', 'max' => 100],
             [['payment_no'], 'string', 'max' => 255],
             [['payment_time'], 'string', 'max' => 50],
+            [['payment_money'], 'number'],
         ];
     }
 
@@ -51,6 +53,7 @@ class PayBackResult extends \yii\db\ActiveRecord
             'partner_trade_no' => 'Partner Trade No',
             'payment_no' => 'Payment No',
             'payment_time' => 'Payment Time',
+            'payment_money' => 'Payment Money',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
