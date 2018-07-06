@@ -39,7 +39,7 @@ class PayBackMoney extends BaseAction
             $transaction = Yii::$app->db->beginTransaction();
             $payBack = new PayBackResult();
             $payBack->mch_appid = $data['mch_appid'];
-            $payBack->mch_id = $data['mch_id'];
+            $payBack->mch_id = $data['mchid'];
             $payBack->partner_trade_no = $data['partner_trade_no'];
             $payBack->payment_no = $data['payment_no'];
             $payBack->payment_time = $data['payment_time'];
