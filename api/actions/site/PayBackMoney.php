@@ -4,6 +4,7 @@ namespace api\actions\site;
 
 use api\actions\BaseAction;
 use api\library\wxpay\WxpayService;
+use api\models\CapitalDetails;
 use api\models\Member;
 use api\models\PayBackResult;
 use Yii;
@@ -58,6 +59,21 @@ class PayBackMoney extends BaseAction
             if($member->errors) {
                 $transaction->rollBack();
                 throw new \Exception("提现失败", 0);
+            }
+
+            //提现明细
+            $capitalDetails = new CapitalDetails();
+            $capitalDetails->member_id = $member->id;
+            $capitalDetails->type = "-";
+            $capitalDetails->status = CapitalDetails::STATUS_YES;
+            $capitalDetails->kind = CapitalDetails::KIND_40;
+            $capitalDetails->money = $money;
+            $capitalDetails->created_at = $capitalDetails->updated_at = time();
+            $capitalDetails->save();
+            if($capitalDetails->errors) {
+                $transaction->rollBack();
+                Yii::error(json_encode($capitalDetails->errors));
+                throw new \Exception("操作失败", 0);
             }
             $transaction->commit();
             return ['status' => 200, 'message' => "提现成功"];
