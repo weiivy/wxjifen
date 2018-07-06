@@ -25,11 +25,14 @@ class PayBackMoney extends BaseAction
             if(empty($member)) {
                 throw new \Exception("用户不存在", 0);
             }
+            if(empty($member->openid)) {
+                throw new \Exception("openid不存在", 403);
+            }
 
             $wxpay = (object)Yii::$app->params['wx']['wxPayConfig'];
 
             $wxpayService = new WxpayService($wxpay->mch_id, $wxpay->appid, $wxpay->key);
-            $data = $wxpayService->payback($openId, $money);
+            $data = $wxpayService->payback($member->openid, $money);
 
             $payBack = new PayBackResult();
             $payBack->mch_appid = $data['mch_appid'];

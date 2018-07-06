@@ -204,8 +204,8 @@ class WxpayService
             'nonce_str' => self::createNonceStr(),
             'partner_trade_no' => time() . mt_rand(10000, 99999),
             'openid' => $openid,
-            'check_name' => 'FORCE_CHECK', //强制验证真实姓名
-            're_user_name' => '张唯唯', //真实姓名
+            'check_name' => 'NO_CHECK', //强制验证真实姓名
+//            're_user_name' => '张唯唯', //真实姓名
             'amount' => $amount * 100,     //单位 转为分
             'desc' => '用户零钱提现',
             'spbill_create_ip' => $_SERVER['REMOTE_ADDR'],
