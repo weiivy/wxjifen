@@ -18,10 +18,10 @@ class PayBackMoney extends BaseAction
     public function run()
     {
         $money = Yii::$app->request->post('money');
-        $openId = Yii::$app->request->post('openid');
+        $memberId= Yii::$app->request->post('memberId');
         try{
             //验证用户是否存在
-            $member = Member::findOne(['openid' => $openId]);
+            $member = Member::findOne(['id' => $memberId]);
             if(empty($member)) {
                 throw new \Exception("用户不存在", 0);
             }
