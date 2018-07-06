@@ -27,11 +27,14 @@ class PayBackMoney extends BaseAction
                 throw new \Exception("用户不存在", 0);
             }
             if(empty($member->openid)) {
-                throw new \Exception("openid不存在", 403);
+                throw new \Exception("openid不存在", 0);
             }
 
             //处理金额
             $money = $member->money < $money ? $member->money : $money;
+            if($money < 0.30) {
+                throw new \Exception("不满足提现条件", 0);
+            }
             $wxpay = (object)Yii::$app->params['wx']['wxPayConfig'];
 
             $wxpayService = new WxpayService($wxpay->mch_id, $wxpay->appid, $wxpay->key);
