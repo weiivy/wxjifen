@@ -19,14 +19,13 @@ class Upgrade extends BaseAction
         //验证金额
         $type = Yii::$app->request->post('type');
         $fee = CapitalDetails::payFee($type);
-        $fee = 0.01;
         if(empty($fee)) return ['status' => 0, 'message' => '操作失败'];
 
         $kind = CapitalDetails::KIND_31;
 
         //校验等级
         $member = Member::findOne(['id' => $memberId]);
-        if(($fee == 199 && $member->grade >= Member::GRADE_20) || ($fee == 998 && $member->grade >= Member::GRADE_30)) {
+        if(($fee == CapitalDetails::FEE_199 && $member->grade >= Member::GRADE_20) || ($fee == CapitalDetails::FEE_998 && $member->grade >= Member::GRADE_30)) {
             return ['status' => 0, 'message' => '您当前等级是：'. Member::gradeAlisa($member->grade)];
         }
 

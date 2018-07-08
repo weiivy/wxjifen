@@ -59,9 +59,8 @@ class CapitalDetailsService extends Component
     public static function upgradeRebate($memberId, $totalFee)
     {
         $addFee = [
-            '198' => 120,
-            '998' => 600,
-            '0.01' => 0
+            CapitalDetails::FEE_199 => 120,
+            CapitalDetails::FEE_998 => 600,
         ];
         //检查该用户是否有父级
         $pid = MemberService::getPid($memberId);

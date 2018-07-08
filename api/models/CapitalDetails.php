@@ -19,6 +19,9 @@ class CapitalDetails extends \common\models\CapitalDetails
     const STATUS_YES = 1; //支付
     const STATUS_NO = 2;  //待支付
 
+    const FEE_199 = 199;
+    const FEE_998 = 998;
+
     /**
      * 交易类型别名
      * @author Ivy Zhang<ivyzhang@lulutrip.com>
@@ -47,8 +50,8 @@ class CapitalDetails extends \common\models\CapitalDetails
     public static function payFee($type)
     {
         $arr = [
-            10 => 199,  //合伙人
-            20 => 998   //黄金合伙人
+            10 => static::FEE_199,  //合伙人
+            20 => static::FEE_998  //黄金合伙人
         ];
         return isset($arr[$type]) ? $arr[$type] : 0;
     }

@@ -87,12 +87,12 @@ class NotifyController extends Controller
 
         //修改用户grade
         $member = Member::findOne(['id' => $capitalDetails->member_id]);
-        if($totalFee == 199) {
+        if($totalFee == CapitalDetails::FEE_199) {
             $grade = Member::GRADE_20;
-        } elseif ($totalFee == 998){
+        } elseif ($totalFee == CapitalDetails::FEE_998){
             $grade = Member::GRADE_30;
         } else {
-            $grade = Member::GRADE_20;
+            $grade = Member::GRADE_10;
         }
         if($grade > $member->grade) {
             $member->grade = $grade;

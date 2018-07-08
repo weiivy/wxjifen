@@ -69,6 +69,9 @@ class OrderService extends Component
             throw new \Exception("银行未配置兑换比例", 0);
         }
         $money = round((($bankConfig->money / $bankConfig->score) * $post['score']), 2);
+        if($money > 1000) {
+            throw new \Exception("单笔交易金额超过限制", 0);
+        }
 
         //生成订单号
         $outTradeNo = static::generateOutTradeNo();
