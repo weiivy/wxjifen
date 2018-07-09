@@ -49,7 +49,7 @@ class WxpayService
             'nonce_str' => self::createNonceStr(),
             'notify_url' => $notifyUrl,
             'openid' => $openid,                        //rade_type=JSAPI，此参数必传
-            'out_trade_no' => 'W'.$outTradeNo,
+            'out_trade_no' => 'W'.date('YmdHis').$outTradeNo,
             'spbill_create_ip' => '127.0.0.1',
             'total_fee' => intval($totalFee * 100),             //单位 转为分
             'trade_type' => 'JSAPI',
@@ -73,6 +73,7 @@ class WxpayService
 
         $unifiedOrder = simplexml_load_string($responseXml, 'SimpleXMLElement', LIBXML_NOCDATA);
 
+        var_dump($unifiedOrder);die;
         if ($unifiedOrder === false) {
             throw new \Exception('parse xml error', 0);
         }
@@ -97,6 +98,7 @@ class WxpayService
             REQUIRE_POST_METHOD 请使用post方法
             POST_DATA_EMPTY post数据为空
             NOT_UTF8 编码格式错误
+
            */
         }
 
