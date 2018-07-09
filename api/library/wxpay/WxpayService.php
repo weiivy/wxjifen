@@ -73,7 +73,6 @@ class WxpayService
 
         $unifiedOrder = simplexml_load_string($responseXml, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-        var_dump($unifiedOrder);die;
         if ($unifiedOrder === false) {
             throw new \Exception('parse xml error', 0);
         }
