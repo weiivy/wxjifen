@@ -58,7 +58,7 @@ class GetMember extends BaseAction
         //累计收益
         return CapitalDetails::find()
             ->where(['member_id' => $memberId])
-            ->andWhere(['kind' => [CapitalDetails::KIND_20, CapitalDetails::KIND_30]])
+            ->andWhere(['kind' => [CapitalDetails::KIND_20, CapitalDetails::KIND_30, CapitalDetails::KIND_50]])
             ->sum("money");
     }
 
