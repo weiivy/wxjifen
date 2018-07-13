@@ -24,6 +24,9 @@ class AddOrder extends BaseAction
 
 
             //验证图片信息
+            if(in_array($info['bank_id'], [4]) && empty($files)) {
+                throw new \Exception("请上传截图", 0);
+            }
             OrderService::uploadFile($orderId,$files);
             Yii::$app->db->transaction->commit();
 

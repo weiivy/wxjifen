@@ -56,6 +56,12 @@ class OrderService extends Component
      */
     public static function saveOrder($post)
     {
+        if(empty($post['score'])) {
+            throw new \Exception("请选择产品类别", 0);
+        }
+        if(empty($post['exchange_code'])) {
+            throw new \Exception("请输入兑换码", 0);
+        }
         $member = Member::findOne(['id' => $post['member_id']]);
 
         if(empty($member)) {
