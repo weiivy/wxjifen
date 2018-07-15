@@ -43,7 +43,6 @@ class UploadImage extends BaseAction
                     }
                 }
 
-
                 //验证扩展名
                 $newFile = "/uploads/tmp/product/". @date('Ym') . '/' . @date('d') . '/' . uniqid() . '.' . $result[2];
                 Help::recursiveMkdir(\Yii::$app->getBasePath() .'/'.dirname($newFile));
