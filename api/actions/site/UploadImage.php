@@ -16,6 +16,7 @@ class UploadImage extends BaseAction
 {
     public function run()
     {
+        header("Access-Control-Allow-Origin: *");
         try{
             $file = \Yii::$app->request->post('file');
             if ($file === null) {
@@ -57,6 +58,7 @@ class UploadImage extends BaseAction
                     'message' => "上传成功"
                 );
             }
+            throw new \Exception("请选择图片", 0);
         }catch (\Exception $e){
             return array(
                 'status' => $e->getCode(),

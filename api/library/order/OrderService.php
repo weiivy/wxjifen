@@ -87,7 +87,7 @@ class OrderService extends Component
         $order->bank_id = $post['bank_id'];
         $order->integral = $post['score'];
         $order->money = $money;
-        if(!empty($post['exchange_code'])) $order->exchange_code = $post['exchange_code'];
+        $order->exchange_code = $post['exchange_code'];
         if(isset($post['valid_time']) && $post['valid_time'] != '请选择有效期') $order->valid_time = $post['valid_time'];
         $order->status = Order::STATUS_10;
         if(!empty($post['remark'])) $order->remark = $post['remark'];
