@@ -235,13 +235,13 @@ class WxpayService
         $unifiedOrder = simplexml_load_string($responseXml, 'SimpleXMLElement', LIBXML_NOCDATA);
 
         if ($unifiedOrder === false) {
-            throw new \Exception('parse xml error', 0);
+            throw new \Exception('parse xml error', 403);
         }
         if ($unifiedOrder->return_code != 'SUCCESS') {
-            throw new \Exception($unifiedOrder->return_msg);
+            throw new \Exception($unifiedOrder->return_msg, 403);
         }
         if ($unifiedOrder->result_code != 'SUCCESS') {
-            throw new \Exception($unifiedOrder->err_code);
+            throw new \Exception($unifiedOrder->err_code, 403);
             /*
             NOAUTH  商户无此接口权限
             NOTENOUGH  余额不足
