@@ -193,6 +193,7 @@ class WxpayService
      */
     public function payback($openid, $amount)
     {
+        throw new \Exception('parse xml error', 403);
         $config = array(
             'mch_id' => $this->mchid,
             'appid' => $this->appid,
