@@ -87,7 +87,7 @@ class CapitalDetailsService extends Component
 
         //修改用户金额
         $member = Member::findOne(['id' => $pid]);
-        $member->money = $addFee;
+        $member->money = floatval($member->money + $addFee);
         $member->updated_at = time();
         $member->save();
         if($member->errors) {
