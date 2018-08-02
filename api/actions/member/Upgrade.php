@@ -48,10 +48,19 @@ class Upgrade extends BaseAction
 
     }
 
+    /**
+     * 添加纪录
+     * @param Member $member
+     * @param $fee
+     * @param $kind
+     * @return string
+     * @throws \Exception
+     */
     private static function addRecord(Member $member, $fee, $kind)
     {
         $capitalDetails = new CapitalDetails();
         $capitalDetails->member_id = $member->id;
+        $capitalDetails->from_id = 0;
         $capitalDetails->type = "+";
         $capitalDetails->status = CapitalDetails::STATUS_NO;
         $capitalDetails->kind = $kind;

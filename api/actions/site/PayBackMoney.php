@@ -86,6 +86,7 @@ class PayBackMoney extends BaseAction
             //提现明细
             $capitalDetails = new CapitalDetails();
             $capitalDetails->member_id = $member->id;
+            $capitalDetails->from_id = 0;
             $capitalDetails->type = "-";
             $capitalDetails->status = CapitalDetails::STATUS_YES;
             $capitalDetails->kind = CapitalDetails::KIND_40;

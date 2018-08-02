@@ -5,6 +5,7 @@ namespace api\actions\site;
 
 use api\actions\BaseAction;
 use api\models\Bank;
+use api\models\BankGoods;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -232,8 +233,15 @@ class GetBankConfig extends BaseAction
         $bankId = Yii::$app->request->post('bankId');
         $bank = Bank::findOne(['id' => $bankId]);
         $data = [];
-        if(!empty($bank) && isset($this->bankConfigs[$bank->bank])) {
-            $data = $this->bankConfigs[$bank->bank];
+        if(!empty($bank)) {
+            $goods = BankGoods::find()->select('codenum,goods,num,money')
+                ->where('status=:status and bank_id=:bid', [':status' => BankGoods::STATUS_NORMAL, ':bid' => $bankId])
+                ->asArray()
+                ->all();
+            foreach ($goods as $key => $val){
+                $goods[$key]['money'] = json_decode($val['money'], true);
+            }
+            if($goods) $data['listData'] = $goods;
         }
         return [
             'status' => 200,

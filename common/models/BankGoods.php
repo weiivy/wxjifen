@@ -5,26 +5,26 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "pre_capital_details".
+ * This is the model class for table "pre_bank_goods".
  *
  * @property integer $id
- * @property integer $member_id
- * @property integer $from_id
- * @property string $type
- * @property integer $kind
+ * @property integer $bank_id
+ * @property integer $codenum
+ * @property string $goods
+ * @property string $num
  * @property string $money
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
  */
-class CapitalDetails extends \yii\db\ActiveRecord
+class BankGoods extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'pre_capital_details';
+        return 'pre_bank_goods';
     }
 
     /**
@@ -33,9 +33,10 @@ class CapitalDetails extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['member_id', 'from_id', 'kind', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['money'], 'number'],
-            [['type'], 'string', 'max' => 2],
+            [['bank_id'], 'required'],
+            [['bank_id', 'codenum', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['money'], 'string'],
+            [['goods', 'num'], 'string', 'max' => 100],
         ];
     }
 
@@ -46,10 +47,10 @@ class CapitalDetails extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'member_id' => 'Member ID',
-            'from_id' => 'From ID',
-            'type' => 'Type',
-            'kind' => 'Kind',
+            'bank_id' => 'Bank ID',
+            'codenum' => 'Codenum',
+            'goods' => 'Goods',
+            'num' => 'Num',
             'money' => 'Money',
             'status' => 'Status',
             'created_at' => 'Created At',

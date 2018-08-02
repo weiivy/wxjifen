@@ -68,11 +68,12 @@ class CapitalDetailsService extends Component
             return true;
         }
 
-        $addFee = $addFee[$totalFee];
+        $addFee = floatval($addFee[$totalFee]);
         \Yii::$app->db->beginTransaction();
         //有父级给父级返佣
         $capitalDetails = new CapitalDetails();
         $capitalDetails->member_id = $pid;
+        $capitalDetails->from_id = $memberId;
         $capitalDetails->type = "+";
         $capitalDetails->status = CapitalDetails::STATUS_YES;
         $capitalDetails->kind = CapitalDetails::KIND_30;
@@ -87,7 +88,8 @@ class CapitalDetailsService extends Component
 
         //修改用户金额
         $member = Member::findOne(['id' => $pid]);
-        $member->money = floatval($member->money + $addFee);
+        $oldMoney = floatval($member->money);
+        $member->money = floatval($oldMoney+ $addFee);
         $member->updated_at = time();
         $member->save();
         if($member->errors) {
