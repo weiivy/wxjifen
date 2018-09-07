@@ -36,7 +36,7 @@ class GetBankInfo extends BaseAction
             ->select("b.id, b.bank, b.bank_name, b.note")
             ->joinWith('bankConfig bc')
             ->where(['bc.status' => BankConfig::STATUS_YES,'b.status' => Bank::STATUS_YES])
-            ->orderBy('b.id asc, bc.type asc')
+            ->orderBy('b.sort desc,b.id asc, bc.type asc')
             ->asArray()
             ->all();
         $data = [];
